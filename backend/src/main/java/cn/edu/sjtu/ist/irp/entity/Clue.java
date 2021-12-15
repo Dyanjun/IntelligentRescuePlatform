@@ -18,7 +18,5 @@ public class Clue {
 
     String case_id;
 
-    Place place;
-
-    List<Photo> photo;
+    String place_id;
 }

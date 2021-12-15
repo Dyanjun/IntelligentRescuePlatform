@@ -13,4 +13,5 @@ public class RescueMember {
     String name;
     RescueMemberStatus status = RescueMemberStatus.FREE;
     String description;
+    String place_id;
 }

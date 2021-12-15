@@ -13,4 +13,5 @@ public class Place {
     Double latitude;
     String address;
     String description;
+    String lost_person_id;
 }

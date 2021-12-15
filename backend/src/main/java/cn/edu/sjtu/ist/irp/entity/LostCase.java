@@ -22,9 +22,5 @@ public class LostCase {
 
     LostCaseStatus status= LostCaseStatus.AUDITING;
 
-    Place lost_place;
-
-    List<Clue> clue;
-
-    List<RescueMember> rescue_member;
+    String lost_place_id;
 }

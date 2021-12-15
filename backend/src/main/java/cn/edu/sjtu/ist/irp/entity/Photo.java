@@ -10,4 +10,8 @@ public class Photo {
     String url;
 
     String description;
+
+    String lost_person_id;
+
+    String clue_id;
 }

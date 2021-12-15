@@ -15,10 +15,5 @@ public class MissingPerson {
     String dressing;
     String accent;
     String description;
-
-    List<Photo> photo;
-
-    FamilyMember family_member;
-
-    List<Place> place;
+    String family_member_id;
 }

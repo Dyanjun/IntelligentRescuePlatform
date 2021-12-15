@@ -14,5 +14,4 @@ public class FamilyMember {
     String telephone;
     String relationship;
     String description;
-    Place place;
 }
