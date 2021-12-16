@@ -1,13 +1,14 @@
-package cn.edu.sjtu.ist.irp.entity;
+package cn.edu.sjtu.ist.irp.entity.dto;
 
+import cn.edu.sjtu.ist.irp.entity.Place;
 import lombok.Data;
-import java.util.List;
+
 /**
  * @author dyanjun
- * @date 2021/12/15 11:20
+ * @date 2021/12/17 1:33
  */
 @Data
-public class Clue {
+public class ClueDTO {
     Integer id;
 
     String time;
@@ -18,5 +19,5 @@ public class Clue {
 
     Integer case_id;
 
-    Integer place_id;
+    Place place;
 }

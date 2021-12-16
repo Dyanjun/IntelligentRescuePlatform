@@ -1,17 +1,18 @@
 package cn.edu.sjtu.ist.irp.entity;
 
+import lombok.Data;
+
 /**
  * @author dyanjun
  * @date 2021/12/15 11:22
  */
+@Data
 public class Photo {
-    String id;
+    Integer id;
 
     String url;
 
-    String description;
+    Integer lost_person_id;
 
-    String lost_person_id;
-
-    String clue_id;
+    Integer clue_id;
 }

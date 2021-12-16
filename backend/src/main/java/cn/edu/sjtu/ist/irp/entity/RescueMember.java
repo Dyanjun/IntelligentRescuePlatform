@@ -8,10 +8,11 @@ import lombok.Data;
  */
 @Data
 public class RescueMember {
-    String id;
-    String wx_id;
+    Integer id;
     String name;
     RescueMemberStatus status = RescueMemberStatus.FREE;
     String description;
-    String place_id;
+    Integer place_id;
+    String username;
+    String password;
 }

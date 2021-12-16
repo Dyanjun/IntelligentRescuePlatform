@@ -8,10 +8,10 @@ import lombok.Data;
  */
 @Data
 public class Place {
-    String id;
+    Integer id;
     Double longitude;
     Double latitude;
     String address;
     String description;
-    String lost_person_id;
+    Integer lost_person_id;
 }

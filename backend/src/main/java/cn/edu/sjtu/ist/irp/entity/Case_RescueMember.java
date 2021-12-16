@@ -1,6 +1,7 @@
 package cn.edu.sjtu.ist.irp.entity;
 
 import lombok.Data;
+import org.omg.PortableInterceptor.INACTIVE;
 
 /**
  * @author dyanjun
@@ -8,7 +9,7 @@ import lombok.Data;
  */
 @Data
 public class Case_RescueMember {
-    String id;
-    String case_id;
-    String rescue_member_id;
+    Integer id;
+    Integer case_id;
+    Integer rescue_member_id;
 }

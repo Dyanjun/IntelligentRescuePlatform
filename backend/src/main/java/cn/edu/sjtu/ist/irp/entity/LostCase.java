@@ -8,7 +8,7 @@ import java.util.List;
  */
 @Data
 public class LostCase {
-    String id;
+    Integer id;
 
     String lost_time;
 
@@ -18,9 +18,9 @@ public class LostCase {
 
     String description;
 
-    String missing_person_id;
+    Integer missing_person_id;
 
     LostCaseStatus status= LostCaseStatus.AUDITING;
 
-    String lost_place_id;
+    Integer lost_place_id;
 }

@@ -15,45 +15,54 @@ import java.util.*;
 public class DatabaseUtil {
 
 
-    public static LinkedHashMap<String,Object> sendGetRequest(String url){
+    public static List<?> sendGetRequest(String url){
         RestTemplate client = new RestTemplate();
         //执行HTTP请求
         ResponseEntity<Result> response  = client.getForEntity(url, Result.class);
         Result result = response.getBody();
         assert result != null;
-        List<?> data = (List<?>) result.getData();
-        if(data.size() > 0){
-            return (LinkedHashMap<String,Object>) data.get(0);
+        if(result.getCode() == 0){
+            List<?> data = (List<?>) result.getData();
+            return data;
         }else{
-            throw new RuntimeException("数据为空");
+            throw new RuntimeException(result.getMessage());
         }
     }
 
-    public static String sendPostRequest(String url, String postContent) {
-        RestTemplate client = new RestTemplate();
+    public static LinkedHashMap<String, Object> sendPostRequest(String url,  Map<String, Object> requestParam) {
+        RestTemplate restTemplate = new RestTemplate();
+        //请求头
         HttpHeaders headers = new HttpHeaders();
-        HttpMethod method = HttpMethod.POST;
-
         headers.setContentType(MediaType.APPLICATION_JSON);
-        //将请求头部和参数合成一个请求
-        HttpEntity<String> requestEntity = new HttpEntity<>(postContent, headers);
 
-        //执行HTTP请求
-        ResponseEntity<String> postForEntity = client.postForEntity(url, requestEntity, String.class);
-
-        return postForEntity.getBody();
+        HttpEntity entity = new HttpEntity<>(requestParam,headers);
+        ResponseEntity<Result> response  = restTemplate.postForEntity(url, entity, Result.class);
+        Result result = response.getBody();
+        assert result != null;
+        if(result.getCode() == 0){
+            LinkedHashMap<String, Object> data = (LinkedHashMap<String, Object>) result.getData();
+            return data;
+        }else{
+            throw new RuntimeException(result.getMessage());
+        }
     }
 
-    public static void sendPutRequest(String url, String postContent) {
-        RestTemplate client = new RestTemplate();
+    public static LinkedHashMap<String, Object> sendPutRequest(String url, Map<String, Object> requestParam) {
+        RestTemplate restTemplate = new RestTemplate();
+        //请求头
         HttpHeaders headers = new HttpHeaders();
-        HttpMethod method = HttpMethod.PUT;
-
         headers.setContentType(MediaType.APPLICATION_JSON);
-        //将请求头部和参数合成一个请求
-        HttpEntity<String> requestEntity = new HttpEntity<>(postContent, headers);
-        //执行HTTP请求
-        client.put(url, requestEntity, String.class);
+
+        HttpEntity entity = new HttpEntity<>(requestParam,headers);
+        ResponseEntity<Result> response = restTemplate.exchange(url, HttpMethod.PUT, entity, Result.class);
+        Result result = response.getBody();
+        assert result != null;
+        if(result.getCode() == 0){
+            LinkedHashMap<String, Object> data = (LinkedHashMap<String, Object>) result.getData();
+            return data;
+        }else{
+            throw new RuntimeException(result.getMessage());
+        }
     }
 
     public static void sendDeleteRequest(String url) {

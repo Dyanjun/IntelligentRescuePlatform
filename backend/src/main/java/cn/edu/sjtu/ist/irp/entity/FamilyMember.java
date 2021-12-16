@@ -8,10 +8,12 @@ import lombok.Data;
  */
 @Data
 public class FamilyMember {
-    String id;
-    String wx_id;
+    Integer id;
     String name;
     String telephone;
     String relationship;
     String description;
+    Integer place_id;
+    String username;
+    String password;
 }

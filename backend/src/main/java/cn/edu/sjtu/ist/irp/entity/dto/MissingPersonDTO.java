@@ -1,13 +1,15 @@
-package cn.edu.sjtu.ist.irp.entity;
+package cn.edu.sjtu.ist.irp.entity.dto;
 
+import cn.edu.sjtu.ist.irp.entity.Place;
 import lombok.Data;
-import java.util.List;
+import java.util.*;
+
 /**
  * @author dyanjun
- * @date 2021/12/15 11:35
+ * @date 2021/12/17 1:34
  */
 @Data
-public class MissingPerson {
+public class MissingPersonDTO {
     Integer id;
     String name;
     String gender;
@@ -16,4 +18,5 @@ public class MissingPerson {
     String accent;
     String description;
     Integer family_member_id;
+    List<Place> places;
 }
