@@ -29,7 +29,7 @@ public class UserService {
     }
 
     public FamilyMember registerFamilyMember(FamilyMember domain){
-        if(loginFamilyMember(domain.getUsername())!= null){
+        if(userDao.getFamilyMemberByUsername(domain.getUsername()) != null){
             throw new RuntimeException("用户名已存在");
         }
         FamilyMember familyMember = userDao.createFamilyMember(domain);
@@ -37,7 +37,7 @@ public class UserService {
     }
 
     public RescueMember registerRescueMember(RescueMember domain){
-        if(loginRescueMember(domain.getUsername())!= null){
+        if(userDao.getRescueMemberByUsername(domain.getUsername()) != null){
             throw new RuntimeException("用户名已存在");
         }
         RescueMember rescueMember = userDao.createRescueMember(domain);
