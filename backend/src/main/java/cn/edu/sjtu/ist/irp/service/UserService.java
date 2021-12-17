@@ -23,17 +23,23 @@ public class UserService {
 
     public Integer loginRescueMember(String username){
         RescueMember rescueMember = userDao.getRescueMemberByUsername(username);
+        // TODO 更新定位
         if(rescueMember==null) throw new RuntimeException("救援人员不存在");
         return rescueMember.getId();
     }
 
     public FamilyMember registerFamilyMember(FamilyMember domain){
+        if(loginFamilyMember(domain.getUsername())!= null){
+            throw new RuntimeException("用户名已存在");
+        }
         FamilyMember familyMember = userDao.createFamilyMember(domain);
         return familyMember;
     }
 
     public RescueMember registerRescueMember(RescueMember domain){
-        // TODO 更新定位
+        if(loginRescueMember(domain.getUsername())!= null){
+            throw new RuntimeException("用户名已存在");
+        }
         RescueMember rescueMember = userDao.createRescueMember(domain);
         return rescueMember;
     }
