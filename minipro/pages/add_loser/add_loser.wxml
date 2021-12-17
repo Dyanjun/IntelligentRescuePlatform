@@ -1,0 +1,67 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="title">
+    <image class="logo" src="https://vi.sjtu.edu.cn/uploads/files/caf2f5045c47308250fab3812dfe2003-6896b91594f238b24e67696224948251.png"></image>
+    <text>  IST智能救援平台客户端</text>
+  </view>
+
+  <view class="subtitle"> 
+    <text>添加家人信息</text>  
+  </view>
+  
+  <view>
+    <view class="cube">
+      <form bindsubmit="submitLoserInfo">
+        <view class="line"> 
+          <label>姓名:</label>
+          <input
+            class="input"
+            name="personName"
+          />
+        </view>
+        <view class="line">
+          <label>性别:</label>
+          <radio-group name="gender">
+            <label><radio checked value="male"/>男</label>   
+            <label><radio value="female"/>女</label>
+          </radio-group>
+        </view>
+        <view class="line"> 
+          <label>年龄:</label>
+          <input
+            class="input"
+            name="age"
+          />
+        </view>
+        <view class="line"> 
+          <label>穿着:</label>
+          <input
+            class="input"
+            name="dressing"
+          />
+        </view>
+        <view class="line"> 
+          <label>口音:</label>
+          <input
+            class="input"
+            name="accent"
+          />
+        </view>
+        <view class="line"> 
+          <label>近照:</label>
+          <input
+            class="input"
+            name="image"
+          />
+        </view>
+
+        <view class="button">
+          <button type="default" form-type="submit">
+            添加
+          </button>
+        </view>
+      </form>
+    </view>
+  </view>
+
+</view>
