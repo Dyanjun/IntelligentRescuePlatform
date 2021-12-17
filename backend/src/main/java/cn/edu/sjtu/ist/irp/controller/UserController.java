@@ -1,6 +1,7 @@
 package cn.edu.sjtu.ist.irp.controller;
 
 import cn.edu.sjtu.ist.irp.entity.FamilyMember;
+import cn.edu.sjtu.ist.irp.entity.Place;
 import cn.edu.sjtu.ist.irp.entity.RescueMember;
 import cn.edu.sjtu.ist.irp.service.UserService;
 import cn.edu.sjtu.ist.irp.util.response.Result;
@@ -25,7 +26,7 @@ public class UserController {
     }
 
     @GetMapping("/login/rescue_member")
-    public Result<Integer> loginRecsueMember(@RequestParam(value = "username") String username){
+    public Result<Integer> loginRescueMember(@RequestParam(value = "username") String username){
         return ResultUtil.success(userService.loginRescueMember(username));
     }
 
@@ -37,5 +38,11 @@ public class UserController {
     @PostMapping("/register/rescue_member")
     public Result<RescueMember> registerRescueMember(@RequestBody RescueMember rescueMember){
         return ResultUtil.success(userService.registerRescueMember(rescueMember));
+    }
+
+    @PutMapping("/rescue_member/place/{id}")
+    public Result updaterRescueMember(@PathVariable Integer id, @RequestBody Place place){
+        userService.updateRescueMember(id, place);
+        return ResultUtil.success();
     }
 }

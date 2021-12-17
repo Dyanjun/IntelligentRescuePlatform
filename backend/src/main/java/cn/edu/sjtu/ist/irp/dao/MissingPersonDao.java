@@ -37,6 +37,17 @@ public class MissingPersonDao {
         return null;
     }
 
+    public List<MissingPerson> getMissingPersonByFamilyMember(Integer id){
+        String url = BaseUrl + "/?missing_person.family_member_id="+id.toString();
+        List<?> data = DatabaseUtil.sendGetRequest(url);
+        List<MissingPerson> missingPersonList = new ArrayList<>();
+        for(Object obj: data){
+            MissingPerson missingPerson = BeanMapUtilByReflect.mapToBean((LinkedHashMap<String, Object>) obj, MissingPerson.class);
+            missingPersonList.add(missingPerson);
+        }
+        return missingPersonList;
+    }
+
     public MissingPerson getMissingPersonByCase(Integer id){
         String case_url = BaseCaseUrl + "/?case.id="+id.toString();
         List<?> case_data = DatabaseUtil.sendGetRequest(case_url);

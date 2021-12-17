@@ -8,7 +8,7 @@ import cn.edu.sjtu.ist.irp.util.response.ResultUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
+import java.util.*;
 /**
  * @author dyanjun
  * @date 2021/12/17 0:14
@@ -21,12 +21,17 @@ public class MissingPersonController {
     MissingPersonService missingPersonService;
 
     @PostMapping("")
-    public Result<MissingPerson>  createMissingPerson(@RequestBody MissingPersonDTO missingPerson, @RequestParam(value = "files") MultipartFile[] files){
-        return ResultUtil.success(missingPersonService.createMissingPerson(missingPerson, files));
+    public Result<MissingPersonDTO>  createMissingPerson(@RequestBody MissingPersonDTO missingPersonDTO, @RequestParam(value = "files", required = false) MultipartFile[] files){
+        return ResultUtil.success(missingPersonService.createMissingPerson(missingPersonDTO, files));
     }
 
-    @GetMapping("/{id}")
-    public Result<MissingPerson>  getMissingPersonByCase(@PathVariable Integer id){
+    @GetMapping("/family_member/{id}")
+    public Result<List<MissingPersonDTO>>  getMissingPersonByFamilyMember(@PathVariable Integer id){
+        return ResultUtil.success(missingPersonService.getMissingPersonByFamilyMember(id));
+    }
+
+    @GetMapping("/case/{id}")
+    public Result<MissingPersonDTO>  getMissingPersonByCase(@PathVariable Integer id){
         return ResultUtil.success(missingPersonService.getMissingPersonByCase(id));
     }
 

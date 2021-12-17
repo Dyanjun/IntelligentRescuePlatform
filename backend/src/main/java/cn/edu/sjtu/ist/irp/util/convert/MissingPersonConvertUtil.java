@@ -1,6 +1,7 @@
 package cn.edu.sjtu.ist.irp.util.convert;
 
 import cn.edu.sjtu.ist.irp.entity.MissingPerson;
+import cn.edu.sjtu.ist.irp.entity.Photo;
 import cn.edu.sjtu.ist.irp.entity.Place;
 import cn.edu.sjtu.ist.irp.entity.dto.MissingPersonDTO;
 import java.util.*;
@@ -22,7 +23,7 @@ public class MissingPersonConvertUtil {
         return missingPerson;
     }
 
-    static public MissingPersonDTO convertDomain2DTO(MissingPerson domain, List<Place> places){
+    static public MissingPersonDTO convertDomain2DTO(MissingPerson domain, List<Place> places, List<Photo> photos){
         MissingPersonDTO missingPersonDTO = new MissingPersonDTO();
         missingPersonDTO.setName(domain.getName());
         missingPersonDTO.setGender(domain.getGender());
@@ -32,6 +33,7 @@ public class MissingPersonConvertUtil {
         missingPersonDTO.setDescription(domain.getDescription());
         missingPersonDTO.setFamily_member_id(domain.getFamily_member_id());
         missingPersonDTO.setPlaces(places);
+        missingPersonDTO.setPhotos(photos);
         return missingPersonDTO;
     }
 }

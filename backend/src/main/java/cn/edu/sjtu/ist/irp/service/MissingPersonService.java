@@ -33,7 +33,7 @@ public class MissingPersonService {
     @Autowired
     PlaceDao placeDao;
 
-    public MissingPerson createMissingPerson(MissingPersonDTO dto, MultipartFile[] files){
+    public MissingPersonDTO createMissingPerson(MissingPersonDTO dto, MultipartFile[] files){
         MissingPerson missingPerson1 = missingPersonDao.createMissingPerson(MissingPersonConvertUtil.convertDTO2Domain(dto));
         List<Place> placeList = new ArrayList<>();
         for(Place place: dto.getPlaces()){
@@ -49,14 +49,34 @@ public class MissingPersonService {
             photo.setUrl(photoFile1.getUrl());
             photoDao.createPhoto(photo);
         }
-        return missingPerson1;
+        return more(missingPerson1);
     }
 
     public MissingPerson getMissingPersonById(Integer id){
         return missingPersonDao.getMissingPersonById(id);
     }
 
-    public MissingPerson getMissingPersonByCase(Integer id){
-        return missingPersonDao.getMissingPersonByCase(id);
+    public MissingPersonDTO getMissingPersonByCase(Integer id){
+        return more(missingPersonDao.getMissingPersonByCase(id));
+    }
+
+    public List<MissingPersonDTO> getMissingPersonByFamilyMember(Integer id) {
+        return moreList(missingPersonDao.getMissingPersonByFamilyMember(id));
+    }
+
+    private List<MissingPersonDTO> moreList(List<MissingPerson> list){
+        List<MissingPersonDTO> DTOList = new ArrayList<>();
+        for(MissingPerson domain: list){
+            List<Place> places = placeDao.getPlaceByMissingPerson(domain.getId());
+            List<Photo> photos = photoDao.getPhotoByMissingPerson(domain.getId());
+            DTOList.add(MissingPersonConvertUtil.convertDomain2DTO(domain,places,photos));
+        }
+        return DTOList;
+    }
+
+    private MissingPersonDTO more(MissingPerson domain){
+        List<Place> places = placeDao.getPlaceByMissingPerson(domain.getId());
+        List<Photo> photos = photoDao.getPhotoByMissingPerson(domain.getId());
+        return MissingPersonConvertUtil.convertDomain2DTO(domain,places,photos);
     }
 }

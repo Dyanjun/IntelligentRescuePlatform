@@ -1,7 +1,9 @@
 package cn.edu.sjtu.ist.irp.service;
 
+import cn.edu.sjtu.ist.irp.dao.PlaceDao;
 import cn.edu.sjtu.ist.irp.dao.UserDao;
 import cn.edu.sjtu.ist.irp.entity.FamilyMember;
+import cn.edu.sjtu.ist.irp.entity.Place;
 import cn.edu.sjtu.ist.irp.entity.RescueMember;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,9 @@ import org.springframework.stereotype.Service;
 public class UserService {
     @Autowired
     UserDao userDao;
+
+    @Autowired
+    PlaceDao placeDao;
 
     public Integer loginFamilyMember(String username){
         FamilyMember familyMember = userDao.getFamilyMemberByUsername(username);
@@ -42,5 +47,12 @@ public class UserService {
         }
         RescueMember rescueMember = userDao.createRescueMember(domain);
         return rescueMember;
+    }
+
+    public void updateRescueMember(Integer id, Place place) {
+        RescueMember rescueMember = userDao.getRescueMemberById(id);
+        Place place1 = placeDao.getPlaceById(rescueMember.getPlace_id());
+        place.setId(place1.getId());
+        placeDao.putPlace(place);
     }
 }

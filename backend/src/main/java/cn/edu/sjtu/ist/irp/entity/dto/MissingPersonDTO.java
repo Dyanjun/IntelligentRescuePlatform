@@ -1,5 +1,6 @@
 package cn.edu.sjtu.ist.irp.entity.dto;
 
+import cn.edu.sjtu.ist.irp.entity.Photo;
 import cn.edu.sjtu.ist.irp.entity.Place;
 import lombok.Data;
 import java.util.*;
@@ -19,4 +20,5 @@ public class MissingPersonDTO {
     String description;
     Integer family_member_id;
     List<Place> places;
+    List<Photo> photos;
 }
