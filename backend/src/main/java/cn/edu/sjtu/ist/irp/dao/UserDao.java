@@ -35,7 +35,7 @@ public class UserDao {
     }
 
     public RescueMember getRescueMemberById(Integer id){
-        String url = RescueMemberBaseUrl + "/?family_member.username="+id.toString();
+        String url = RescueMemberBaseUrl + "/?rescue_member.id="+id.toString();
         List<?> data = DatabaseUtil.sendGetRequest(url);
         if(data.size()>0){
             RescueMember rescueMember = RescueMemberConvertUtil.convertPo2Domain((LinkedHashMap<String, Object>) data.get(0));
@@ -55,7 +55,7 @@ public class UserDao {
     }
 
     public RescueMember getRescueMemberByUsername(String username){
-        String url = RescueMemberBaseUrl + "/?family_member.username="+username;
+        String url = RescueMemberBaseUrl + "/?rescue_member.username="+username;
         List<?> data = DatabaseUtil.sendGetRequest(url);
         if(data.size()>0){
             RescueMember rescueMember = RescueMemberConvertUtil.convertPo2Domain((LinkedHashMap<String, Object>) data.get(0));

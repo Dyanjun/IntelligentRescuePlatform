@@ -15,4 +15,5 @@ public class RescueMember {
     Integer place_id;
     String username;
     String password;
+    String telephone;
 }
