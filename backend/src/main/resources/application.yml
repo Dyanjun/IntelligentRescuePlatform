@@ -1,0 +1,8 @@
+wx:
+    #微信小程序的 appId
+    appId: "wxae9337c6b97d3a1d"
+    #微信小程序的 appSecret
+    appSecret: "5f1993d2e4aad16e2bb798a107d90ca2"
+    #模板 ID
+    templateId: "R1S1v3UnJasjrAQCzlLmexLRAAX8sWtvO_fJmYDx-qQ"
+
