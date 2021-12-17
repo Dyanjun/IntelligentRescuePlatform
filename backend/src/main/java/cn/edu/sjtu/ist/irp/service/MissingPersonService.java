@@ -33,22 +33,23 @@ public class MissingPersonService {
     @Autowired
     PlaceDao placeDao;
 
-    public MissingPersonDTO createMissingPerson(MissingPersonDTO dto, MultipartFile[] files){
+    public MissingPersonDTO createMissingPerson(MissingPersonDTO dto){
+//    public MissingPersonDTO createMissingPerson(MissingPersonDTO dto, MultipartFile[] files){
         MissingPerson missingPerson1 = missingPersonDao.createMissingPerson(MissingPersonConvertUtil.convertDTO2Domain(dto));
-        List<Place> placeList = new ArrayList<>();
-        for(Place place: dto.getPlaces()){
-            Place place1 = placeDao.createPlace(place);
-            placeList.add(place1);
-        }
-        for(MultipartFile file: files){
-            PhotoFile photoFile = new PhotoFile();
-            photoFile.setFile(file);
-            PhotoFile photoFile1 = photoFileDao.createPhoto(photoFile);
-            Photo photo = new Photo();
-            photo.setLost_person_id(missingPerson1.getId());
-            photo.setUrl(photoFile1.getUrl());
-            photoDao.createPhoto(photo);
-        }
+//        List<Place> placeList = new ArrayList<>();
+//        for(Place place: dto.getPlaces()){
+//            Place place1 = placeDao.createPlace(place);
+//            placeList.add(place1);
+//        }
+//        for(MultipartFile file: files){
+//            PhotoFile photoFile = new PhotoFile();
+//            photoFile.setFile(file);
+//            PhotoFile photoFile1 = photoFileDao.createPhoto(photoFile);
+//            Photo photo = new Photo();
+//            photo.setLost_person_id(missingPerson1.getId());
+//            photo.setUrl(photoFile1.getUrl());
+//            photoDao.createPhoto(photo);
+//        }
         return more(missingPerson1);
     }
 

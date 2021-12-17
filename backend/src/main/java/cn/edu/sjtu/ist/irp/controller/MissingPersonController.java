@@ -21,8 +21,11 @@ public class MissingPersonController {
     MissingPersonService missingPersonService;
 
     @PostMapping("")
+//    public Result<MissingPersonDTO>  createMissingPerson(@RequestBody MissingPersonDTO missingPersonDTO, @RequestParam(value = "files", required = false) MultipartFile[] files){
+//        return ResultUtil.success(missingPersonService.createMissingPerson(missingPersonDTO, files));
+//    }
     public Result<MissingPersonDTO>  createMissingPerson(@RequestBody MissingPersonDTO missingPersonDTO, @RequestParam(value = "files", required = false) MultipartFile[] files){
-        return ResultUtil.success(missingPersonService.createMissingPerson(missingPersonDTO, files));
+        return ResultUtil.success(missingPersonService.createMissingPerson(missingPersonDTO));
     }
 
     @GetMapping("/family_member/{id}")
