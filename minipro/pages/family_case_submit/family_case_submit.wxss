@@ -1,0 +1,68 @@
+/**login.wxss**/
+.title {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: large;
+}
+
+.subtitle {
+  margin-top: 30px;
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.login {
+  margin-top: 40px;
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.logo {
+  width: 24px;
+  height: 24px;
+}
+
+.form {
+  margin-top: 20px;
+  width: 90%;
+}
+
+.line {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: small;
+  display: flex;
+}
+
+.input {
+  border-bottom: 2px solid #999999;
+}
+
+label {
+  margin-right: 50rpx;
+}
+
+.register {
+  text-decoration-line: underline;
+}
+
+.cube {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 90%;
+}
+
+.small_button {
+  width: 30%;
+  font-size: x-small;
+  color: blue;
+}
+
+.button {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.map {
+  width: 70%;
+}

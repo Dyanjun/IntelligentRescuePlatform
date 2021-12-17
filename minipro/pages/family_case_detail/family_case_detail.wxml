@@ -1,0 +1,66 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="title">
+    <image class="logo" src="https://vi.sjtu.edu.cn/uploads/files/caf2f5045c47308250fab3812dfe2003-6896b91594f238b24e67696224948251.png"></image>
+    <text>  IST智能救援平台客户端</text>
+  </view>
+
+  <view class="subtitle"> 
+    <text>案件详情</text>  
+  </view>
+  
+  <view class="cube">
+    <view class="line"> 
+      <label>案件id:</label>
+      <text>{{caseDetail.caseId}}</text>
+    </view>
+    <view class="line"> 
+      <label>案件状态:</label>
+      <text>{{caseDetail.status}}</text>
+    </view>
+    <view class="line"> 
+      <label>案发时间:</label>
+      <text>{{caseDetail.time}}</text>
+    </view>
+    <view class="line"> 
+      <label>案发地点:</label>
+      <map longitude="{{caseDetail.place.longitude}}" latitude="{{caseDetail.place.latitude}}" markers="{{markers}}"></map>
+    </view>
+    <view class="line">
+      <label>走失者:</label>
+      <text>{{caseDetail.personName}}</text>
+    </view>
+    <view class="line"> 
+      <label>性别:</label>
+      <text>{{caseDetail.gender}}</text>
+    </view>
+    <view class="line"> 
+      <label>年龄:</label>
+      <text>{{caseDetail.age}}</text>
+    </view>
+    <view class="line"> 
+      <label>穿着:</label>
+      <text>{{caseDetail.dressing}}</text>
+    </view>
+    <view class="line"> 
+      <label>口音:</label>
+      <text>{{caseDetail.accent}}</text>
+    </view>
+    <view class="line"> 
+      <image class="photo" mode="aspectFit" src="{{caseDetail.image}}"></image>
+    </view>
+  </view>
+
+  <view>
+    <button class="button" type="default" bindtap="showClue">
+      查看线索
+    </button>
+  </view>
+
+  <view wx:if="{{caseDetail.status != '已结束'}}">
+    <button class="button" type="warn" bindtap="callPolice">
+      一键报警
+    </button>
+  </view>
+
+</view>

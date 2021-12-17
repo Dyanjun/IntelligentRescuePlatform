@@ -1,0 +1,48 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="title">
+    <image class="logo" src="https://vi.sjtu.edu.cn/uploads/files/caf2f5045c47308250fab3812dfe2003-6896b91594f238b24e67696224948251.png"></image>
+    <text>  IST智能救援平台客户端</text>
+  </view>
+
+  <view class="subtitle"> 
+    <text>用户登录</text>  
+  </view>
+  
+  <form bindsubmit="submitLogin" class="form">
+    <view class="line"> 
+      <input
+        class="input"
+        name="username"
+        placeholder="用户名"
+      />
+    </view>
+
+    <view class="line"> 
+      <input
+        class="input"
+        name="password"
+        placeholder="密码"
+      />
+    </view>
+    
+    <view class="line">
+      <radio-group name="radio">
+        <label><radio checked value="family"/>家属</label>   
+        <label><radio value="rescue"/>救援人员</label>
+      </radio-group>
+    </view>
+    
+    <view class="button">
+      <button type="default" form-type="submit">
+        登录
+      </button>
+    </view>
+  </form>
+
+  <view class="line">
+    还没有账户？  
+    <text class="register" bindtap="redirectRegister">立即注册</text>
+  </view>
+
+</view>

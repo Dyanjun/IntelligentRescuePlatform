@@ -1,0 +1,39 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="title">
+    <image class="logo" src="https://vi.sjtu.edu.cn/uploads/files/caf2f5045c47308250fab3812dfe2003-6896b91594f238b24e67696224948251.png"></image>
+    <text>  IST智能救援平台客户端</text>
+  </view>
+
+  <view class="subtitle"> 
+    <text>线索信息</text>  
+  </view>
+  
+  <view class="content">
+    <view
+      wx:for="{{clueList}}"
+      wx:for-item="item" 
+      wx:for-index="index"
+      wx:key="key"
+      >
+      <view class="cube">
+        <view class="line"> 
+          <label>线索ID:</label>
+          <text>{{item.clueId}}</text>
+        </view>
+        <view class="line"> 
+          <label>线索时间:</label>
+          <text>{{item.time}}</text>
+        </view>
+        <view class="line"> 
+          <label>线索描述:</label>
+          <text>{{item.description}}</text>
+        </view>
+        <view class="line"> 
+          <label>线索地点:</label>
+          <map wx:if="{{hasMarker}}" longitude="{{item.place.longitude}}" latitude="{{item.place.latitude}}" markers="{{item.markers}}"></map>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
