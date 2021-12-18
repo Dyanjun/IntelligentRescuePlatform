@@ -29,21 +29,7 @@ public class LostCaseConvertUtil {
 
         return lostCase;
     }
-    Integer id;
 
-    String lost_time;
-
-    String emergency_level;
-
-    Integer rescue_num;
-
-    String description;
-
-    MissingPersonDTO missingPerson;
-
-    LostCaseStatus status= LostCaseStatus.AUDITING;
-
-    Place place;
     public static LostCaseDTO convertDomain2DTO(LostCase lostCase, MissingPerson missingPerson, Place place){
         LostCaseDTO lostCaseDTO = new LostCaseDTO();
         lostCaseDTO.setId(lostCase.getId());
@@ -58,14 +44,15 @@ public class LostCaseConvertUtil {
         return lostCaseDTO;
     }
 
-    public static LostCase convertDTO2Domain(LostCaseDTO lostCaseDTO){
+    public static LostCase convertDTO2Domain(LostCaseDTO lostCaseDTO, Integer placeId){
         LostCase lostCase = new LostCase();
         lostCase.setLost_time(lostCaseDTO.getLost_time());
         lostCase.setEmergency_level(lostCaseDTO.getEmergency_level());
-        lostCase.setRescue_num(lostCase.getRescue_num());
-        lostCase.setDescription(lostCase.getDescription());
+        lostCase.setRescue_num(lostCaseDTO.getRescue_num());
+        lostCase.setDescription(lostCaseDTO.getDescription());
         lostCase.setMissing_person_id(lostCaseDTO.getMissingPerson().getId());
         lostCase.setStatus(lostCaseDTO.getStatus());
+        lostCase.setLost_place_id(placeId);
         return lostCase;
     }
 }

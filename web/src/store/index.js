@@ -3,9 +3,7 @@ import Vuex from 'vuex'
 
 import user from './module/user'
 import app from './module/app'
-import device from './module/device'
-import sensor from './module/sensor'
-
+import lostCase from './module/lostCase'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -21,7 +19,6 @@ export default new Vuex.Store({
   modules: {
     user,
     app,
-    device,
-    sensor
+    lostCase
   }
 })

@@ -33,9 +33,17 @@ public class LostCaseController {
     /**
      * 发布走失案例
      */
-    @PostMapping("/{id}")
+    @PostMapping("/{id}/publish")
     public Result<LostCaseDTO> publishLostCase(@PathVariable Integer id) {
         return ResultUtil.success(lostCaseService.publishLostCase(id));
+    }
+
+    /**
+     * 拒绝走失案例
+     */
+    @PostMapping("/{id}/reject")
+    public Result<LostCaseDTO> rejectLostCase(@PathVariable Integer id) {
+        return ResultUtil.success(lostCaseService.rejectLostCase(id));
     }
 
     /**
@@ -68,5 +76,13 @@ public class LostCaseController {
     @GetMapping("/audit")
     public Result<List<LostCaseDTO>> getAllLostCaseForAudit() {
         return ResultUtil.success(lostCaseService.getLostCaseByStatus(LostCaseStatus.AUDITING));
+    }
+
+    /**
+     * 审核人员获取所有的案例
+     */
+    @GetMapping("")
+    public Result<List<LostCaseDTO>> getAllLostCase() {
+        return ResultUtil.success(lostCaseService.getAllLostCase());
     }
 }

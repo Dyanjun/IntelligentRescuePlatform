@@ -28,9 +28,9 @@ export default [
     component: () => import('@/view/login/login.vue')
   },
   {
-    path: '/home',
+    path: '/',
     name: '_home',
-    // redirect: '/home',
+    redirect: '/home',
     component: Main,
     meta: {
       hideInMenu: true,
@@ -75,45 +75,59 @@ export default [
     component: () => import('@/view/error-page/404.vue')
   },
   {
-    path: '/',
-    redirect: '/device',
-    name: '设备管理',
+    path: '/case',
+    name: '案件管理',
     component: Main,
     meta: {
-      title: '设备管理',
+      title: '案件管理',
       icon: 'logo-buffer'
     },
-    children: [
-      {
-        path: '/device',
-        name: '设备管理',
-        meta: {
-          hideInMenu: true,
-          title: '设备管理',
-          icon: 'logo-buffer'
-        },
-        component: () => import('@/view/device/device-management.vue')
+    children: [{
+      path: 'audit',
+      name: '审核案件',
+      meta: {
+        title: '审核案件',
+        icon: 'logo-buffer'
       },
-      {
-        path: '/device/detail',
-        name: '设备详情',
-        meta: {
-          hideInMenu: true,
-          title: '设备详情'
-        },
-        component: () => import('@/view/device/device-detail.vue'),
-        props: true
+      component: () => import('@/view/case/case-management.vue')
+    },
+    {
+      path: 'all',
+      name: '所有案件',
+      meta: {
+        title: '所有案件',
+        icon: 'logo-buffer'
       },
-      {
-        path: '/device/history',
-        name: '设备历史数据',
-        meta: {
-          hideInMenu: true,
-          title: '设备历史数据'
-        },
-        component: () => import('@/view/device/device-history-data.vue'),
-        props: true
-      }
+      component: () => import('@/view/case/case-management.vue')
+    }]
+  },
+  {
+    path: '/data',
+    name: '数据分析',
+    component: Main,
+    meta: {
+      title: '数据分析',
+      icon: 'logo-buffer'
+    },
+    children: [{
+      path: 'location',
+      name: '地理热力图',
+      meta: {
+        title: '地理热力图',
+        icon: 'logo-buffer'
+      },
+      component: () => import('@/view/data/place-heat-statistic.vue')
+    },
+    {
+      path: 'statistic',
+      name: '各类数据分析',
+      meta: {
+        title: '各类数据分析',
+        icon: 'logo-buffer'
+      },
+      component: () => import('@/view/data/data-management.vue')
+    }
     ]
+
   }
 ]

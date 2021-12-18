@@ -47,6 +47,10 @@ public class LostCaseService {
         return null;
     }
 
+    public List<LostCaseDTO> getAllLostCase(){
+        return moreList(lostCaseDao.getLostCase());
+    }
+
     public List<LostCaseDTO> getLostCaseByRescueMember(Integer id){
         return moreList(lostCaseDao.getLostCaseByRescueMember(id));
     }
@@ -56,8 +60,10 @@ public class LostCaseService {
     }
 
     public LostCaseDTO createLostCase(LostCaseDTO lostCaseDTO){
-        LostCase lostCase= LostCaseConvertUtil.convertDTO2Domain(lostCaseDTO);
+
         Place place = placeDao.createPlace(lostCaseDTO.getPlace());
+
+        LostCase lostCase= LostCaseConvertUtil.convertDTO2Domain(lostCaseDTO, place.getId());
 
         lostCase.setStatus(LostCaseStatus.AUDITING);
         LostCase lostCase1 = lostCaseDao.createLostCase(lostCase);
@@ -83,6 +89,21 @@ public class LostCaseService {
         }
     }
 
+    public LostCaseDTO rejectLostCase(Integer id) {
+        LostCase lostCase = lostCaseDao.getLostCaseById(id);
+        if(lostCase.getStatus() == LostCaseStatus.AUDITING){
+            lostCase.setStatus(LostCaseStatus.REJECTED);
+            LostCase lostCase1 = lostCaseDao.updateLostCase(lostCase);
+
+            // TODO 通知家属拒绝
+
+            return more(lostCase1);
+        }
+        else{
+            throw new RuntimeException("案件未处于待审核状态");
+        }
+    }
+
     private List<LostCaseDTO> moreList(List<LostCase> lostCaseList){
         List<LostCaseDTO> lostCaseDTOList = new ArrayList<>();
         for(LostCase lostCase: lostCaseList){
@@ -98,4 +119,6 @@ public class LostCaseService {
         MissingPerson missingPerson = missingPersonDao.getMissingPersonById(lostCase.getMissing_person_id());
         return LostCaseConvertUtil.convertDomain2DTO(lostCase,missingPerson,place);
     }
+
+
 }
