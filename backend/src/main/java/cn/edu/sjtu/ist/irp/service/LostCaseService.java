@@ -32,6 +32,7 @@ public class LostCaseService {
 
     public List<LostCaseDTO> getLostCaseByFamilyMember(Integer id){
         List<LostCase> lostCaseList = lostCaseDao.getLostCaseByFamilyMember(id);
+        System.out.println(lostCaseList);
         return moreList(lostCaseList);
     }
 
@@ -56,8 +57,10 @@ public class LostCaseService {
     }
 
     public LostCaseDTO createLostCase(LostCaseDTO lostCaseDTO){
-        LostCase lostCase= LostCaseConvertUtil.convertDTO2Domain(lostCaseDTO);
+
         Place place = placeDao.createPlace(lostCaseDTO.getPlace());
+
+        LostCase lostCase= LostCaseConvertUtil.convertDTO2Domain(lostCaseDTO, place.getId());
 
         lostCase.setStatus(LostCaseStatus.AUDITING);
         LostCase lostCase1 = lostCaseDao.createLostCase(lostCase);

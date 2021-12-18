@@ -27,6 +27,7 @@ public class LostCaseController {
      */
     @PostMapping("")
     public Result<LostCaseDTO> submitLostCase(@RequestBody LostCaseDTO lostCaseDTO) {
+        System.out.println(lostCaseDTO);
         return ResultUtil.success(lostCaseService.createLostCase(lostCaseDTO));
     }
 
