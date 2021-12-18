@@ -40,11 +40,13 @@ public class MissingPersonDao {
     public List<MissingPerson> getMissingPersonByFamilyMember(Integer id){
         String url = BaseUrl + "/?missing_person.family_member_id="+id.toString();
         List<?> data = DatabaseUtil.sendGetRequest(url);
+        System.out.println(data);
         List<MissingPerson> missingPersonList = new ArrayList<>();
         for(Object obj: data){
             MissingPerson missingPerson = BeanMapUtilByReflect.mapToBean((LinkedHashMap<String, Object>) obj, MissingPerson.class);
             missingPersonList.add(missingPerson);
         }
+        System.out.println(missingPersonList);
         return missingPersonList;
     }
 

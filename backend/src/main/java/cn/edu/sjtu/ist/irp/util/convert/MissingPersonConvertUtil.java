@@ -25,6 +25,7 @@ public class MissingPersonConvertUtil {
 
     static public MissingPersonDTO convertDomain2DTO(MissingPerson domain, List<Place> places, List<Photo> photos){
         MissingPersonDTO missingPersonDTO = new MissingPersonDTO();
+        missingPersonDTO.setId(domain.getId());
         missingPersonDTO.setName(domain.getName());
         missingPersonDTO.setGender(domain.getGender());
         missingPersonDTO.setAge(domain.getAge());

@@ -49,12 +49,12 @@ public class LostCaseDao {
      * @return List<LostCase>
      */
     public List<LostCase> getLostCaseByFamilyMember(Integer id){
-            String familyUrl = BaseMissingUrl + "/?missing_person.family_person.id="+ id.toString();
+            String familyUrl = BaseMissingUrl + "/?missing_person.family_member_id="+ id.toString();
             List<?> data = DatabaseUtil.sendGetRequest(familyUrl);
             List<LostCase> lostCaseList = new ArrayList<>();
             for(Object obj: data){
                 MissingPerson missingPerson = BeanMapUtilByReflect.mapToBean((LinkedHashMap<String, Object>) obj, MissingPerson.class);
-                String url = BaseUrl + "/?case.family_member_id=" + missingPerson.getFamily_member_id();
+                String url = BaseUrl + "/?case.missing_person_id=" + missingPerson.getId().toString();
                 List<?> case_data = DatabaseUtil.sendGetRequest(url);
                 if(case_data.size()>0){
                     LostCase lostCase = LostCaseConvertUtil.convertPo2Domain((LinkedHashMap<String, Object>) case_data.get(0));
