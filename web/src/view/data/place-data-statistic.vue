@@ -65,19 +65,15 @@ export default {
           // 地图大小倍数
           zoom: 1.2,
           data: [
-            { name: '北京', value: 40000 },
-            { name: '山西', value: 30000 },
-            { name: '内蒙古', value: 5000 },
-            { name: '青海', value: 7000 },
-            { name: '河北', value: 25000 },
-            { name: '广东', value: 10000 },
-            { name: '黑龙江', value: 40000 },
-            { name: '南海诸岛', value: 20000 }
+            { name: '江苏', value: 1 },
+            { name: '安徽', value: 2 },
+            { name: '湖北', value: 2 },
+            { name: '上海', value: 19 }
           ]
         }],
         visualMap: {
           min: 0,
-          max: 50000,
+          max: 50,
           text: ['High', 'Low'],
           realtime: false,
           calculable: true,

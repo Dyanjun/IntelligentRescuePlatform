@@ -35,4 +35,9 @@ public class MissingPersonController {
         return ResultUtil.success(missingPersonService.getMissingPersonByCase(id));
     }
 
+    @GetMapping("/{id}")
+    public Result<MissingPersonDTO>  getMissingPerson(@PathVariable Integer id){
+        return ResultUtil.success(missingPersonService.getMissingPersonById(id));
+    }
+
 }

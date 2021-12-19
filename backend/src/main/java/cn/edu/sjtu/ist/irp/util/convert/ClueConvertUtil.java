@@ -1,9 +1,6 @@
 package cn.edu.sjtu.ist.irp.util.convert;
 
-import cn.edu.sjtu.ist.irp.entity.Clue;
-import cn.edu.sjtu.ist.irp.entity.LostCase;
-import cn.edu.sjtu.ist.irp.entity.MissingPerson;
-import cn.edu.sjtu.ist.irp.entity.Place;
+import cn.edu.sjtu.ist.irp.entity.*;
 import cn.edu.sjtu.ist.irp.entity.dto.ClueDTO;
 import cn.edu.sjtu.ist.irp.entity.dto.LostCaseDTO;
 
@@ -12,7 +9,7 @@ import cn.edu.sjtu.ist.irp.entity.dto.LostCaseDTO;
  * @date 2021/12/17 2:40
  */
 public class ClueConvertUtil {
-    public static ClueDTO convertDomain2DTO(Clue clue, Place place){
+    public static ClueDTO convertDomain2DTO(Clue clue, Place place, Photo photo){
         ClueDTO dto = new ClueDTO();
 
         dto.setId(clue.getId());
@@ -21,7 +18,7 @@ public class ClueConvertUtil {
         dto.setCase_id(clue.getCase_id());
         dto.setDescription(clue.getDescription());
         dto.setPlace(place);
-
+        dto.setPhoto(photo);
         return dto;
     }
 

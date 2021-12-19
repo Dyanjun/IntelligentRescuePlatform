@@ -70,7 +70,8 @@ public class ClueService {
         List<ClueDTO> clueDTOList = new ArrayList<>();
         for(Clue clue: clueList){
             Place place = placeDao.getPlaceById(clue.getPlace_id());
-            clueDTOList.add(ClueConvertUtil.convertDomain2DTO(clue,place));
+            Photo photo = photoDao.getPhotoByClue(clue.getId());
+            clueDTOList.add(ClueConvertUtil.convertDomain2DTO(clue,place,photo));
         }
         return clueDTOList;
     }
@@ -78,7 +79,8 @@ public class ClueService {
     private ClueDTO more(Clue clue){
         Place place;
         place = placeDao.getPlaceById(clue.getPlace_id());
-        return  ClueConvertUtil.convertDomain2DTO(clue,place);
+        Photo photo = photoDao.getPhotoByClue(clue.getId());
+        return  ClueConvertUtil.convertDomain2DTO(clue,place,photo);
     }
 
     public void publishClue(Integer id) {
@@ -97,4 +99,6 @@ public class ClueService {
         String familyOpenId = WxUtil.getOpenId(familyMember.getUsername());
         WxUtil.SendMessage("案件线索更新",lostCase.getId().toString(),"有新的线索",familyOpenId);
     }
+
+
 }
