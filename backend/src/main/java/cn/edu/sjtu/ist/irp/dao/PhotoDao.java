@@ -31,14 +31,13 @@ public class PhotoDao {
         return null;
     }
 
-    public List<Photo> getPhotoByMissingPerson(Integer id){
+    public Photo getPhotoByMissingPerson(Integer id){
         String url = BaseUrl + "/?photo.lost_person_id="+id.toString();
         List<?> data = DatabaseUtil.sendGetRequest(url);
-        List<Photo> photos = new ArrayList<>();
-        for(Object obj : data){
-            Photo photo = BeanMapUtilByReflect.mapToBean((LinkedHashMap<String, Object>) obj, Photo.class);
-            photos.add(photo);
+        if(data.size()>0){
+            Photo photo = BeanMapUtilByReflect.mapToBean((LinkedHashMap<String, Object>) data.get(0), Photo.class);
+            return photo;
         }
-        return photos;
+        return null;
     }
 }

@@ -1,18 +1,19 @@
 package cn.edu.sjtu.ist.irp.service;
 
-import cn.edu.sjtu.ist.irp.dao.LostCaseDao;
-import cn.edu.sjtu.ist.irp.dao.MissingPersonDao;
-import cn.edu.sjtu.ist.irp.dao.PlaceDao;
-import cn.edu.sjtu.ist.irp.dao.UserDao;
+import cn.edu.sjtu.ist.irp.dao.*;
 import cn.edu.sjtu.ist.irp.entity.*;
 import cn.edu.sjtu.ist.irp.entity.dto.LostCaseDTO;
 import cn.edu.sjtu.ist.irp.entity.dto.RescueMemberDTO;
+import cn.edu.sjtu.ist.irp.util.GeoUtil;
+import cn.edu.sjtu.ist.irp.util.WxUtil;
 import cn.edu.sjtu.ist.irp.util.convert.LostCaseConvertUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.BeanUtils;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author dyanjun
@@ -31,7 +32,13 @@ public class LostCaseService {
     MissingPersonDao missingPersonDao;
 
     @Autowired
-    UserDao userDao;
+    FamilyMemberDao familyMemberDao;
+
+    @Autowired
+    RescueMemberService rescueMemberService;
+
+    @Autowired
+    RescueMemberDao rescueMemberDao;
 
     public List<LostCaseDTO> getLostCaseByFamilyMember(Integer id){
         List<LostCase> lostCaseList = lostCaseDao.getLostCaseByFamilyMember(id);
@@ -74,6 +81,7 @@ public class LostCaseService {
 
         // TODO 推送给审核
 
+
         return more(lostCase1);
     }
 
@@ -82,11 +90,40 @@ public class LostCaseService {
         if(lostCase.getStatus() == LostCaseStatus.AUDITING){
             lostCase.setStatus(LostCaseStatus.PROCEEDING);
             LostCase lostCase1 = lostCaseDao.updateLostCase(lostCase);
+            LostCaseDTO result = more(lostCase1);
 
-            // TODO 派单
-            // TODO 通知家属发布成功
+            // 派单
+            List<RescueMemberDTO> rescueMemberDTOList = rescueMemberService.getRescueMemberStatus(RescueMemberStatus.FREE);
+            Place targetPlace = result.getPlace();
+            for(RescueMemberDTO rescue: rescueMemberDTOList){
+                Place place1 = rescue.getPlace();
+                Double distance = GeoUtil.getDistance(place1.getLongitude(),place1.getLatitude(),targetPlace.getLongitude(),targetPlace.getLatitude());
+                rescue.setDistance(distance);
+            }
+            rescueMemberDTOList.sort(Comparator.comparing(RescueMemberDTO::getDistance));
 
-            return more(lostCase1);
+            Integer rescue_Number = result.getRescue_num();
+            Integer number = rescueMemberDTOList.size() < rescue_Number ? rescueMemberDTOList.size() : rescue_Number;
+            rescueMemberDTOList = rescueMemberDTOList.subList(0, number);
+            for(RescueMemberDTO rescueMemberDTO: rescueMemberDTOList){
+                Case_RescueMember case_rescueMember = new Case_RescueMember();
+                case_rescueMember.setCase_id(result.getId());
+                case_rescueMember.setRescue_member_id(rescueMemberDTO.getId());
+
+                rescueMemberDao.updateStatus(rescueMemberDTO.getId(),RescueMemberStatus.WORKING);
+                lostCaseDao.createCase_RescueMember(case_rescueMember);
+
+                String familyOpenId = WxUtil.getOpenId(rescueMemberDTO.getUsername());
+                WxUtil.SendMessage("新的案件",lostCase1.getId().toString(),"有新的案件",familyOpenId);
+            }
+
+            // 通知家属发布成功
+            MissingPerson missingPerson = missingPersonDao.getMissingPersonByCase(lostCase1.getMissing_person_id());
+            FamilyMember familyMember = familyMemberDao.getFamilyMemberById(missingPerson.getFamily_member_id());
+            String familyOpenId = WxUtil.getOpenId(familyMember.getUsername());
+            WxUtil.SendMessage("案件状态更新",lostCase1.getId().toString(),"审核通过",familyOpenId);
+
+            return result;
         }
         else{
             throw new RuntimeException("案件未处于待审核状态");
@@ -99,7 +136,11 @@ public class LostCaseService {
             lostCase.setStatus(LostCaseStatus.REJECTED);
             LostCase lostCase1 = lostCaseDao.updateLostCase(lostCase);
 
-            // TODO 通知家属拒绝
+            // 通知家属拒绝
+            MissingPerson missingPerson = missingPersonDao.getMissingPersonByCase(lostCase1.getMissing_person_id());
+            FamilyMember familyMember = familyMemberDao.getFamilyMemberById(missingPerson.getFamily_member_id());
+            String familyOpenId = WxUtil.getOpenId(familyMember.getUsername());
+            WxUtil.SendMessage("案件状态更新",lostCase1.getId().toString(),"审核不通过",familyOpenId);
 
             return more(lostCase1);
         }

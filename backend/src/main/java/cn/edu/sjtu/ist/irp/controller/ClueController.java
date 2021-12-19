@@ -21,9 +21,10 @@ public class ClueController {
     @Autowired
     ClueService clueService;
 
-    @PostMapping("")
-    public Result<ClueDTO> createClue(@RequestBody ClueDTO clueDTO, @RequestParam(value = "files") MultipartFile[] files){
-        return ResultUtil.success(clueService.createClue(clueDTO,files));
+    @GetMapping("/case/{id}/publish")
+    public Result createClue(@PathVariable Integer id){
+        clueService.publishClue(id);
+        return ResultUtil.success();
     }
 
     @GetMapping("/case/{id}")
