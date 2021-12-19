@@ -15,7 +15,7 @@ export default {
     getCaseAction ({ state, commit }) {
       return new Promise((resolve, reject) => {
         getCase().then(res => {
-          console.log(res)
+          state.caseList = res
           resolve()
         }).catch(err => {
           reject(err)
@@ -35,7 +35,13 @@ export default {
     publishCaseAction ({ state, commit }, id) {
       return new Promise((resolve, reject) => {
         publishCase(id).then((res) => {
-          state.auditCaseList = state.auditCaseList.filter(c=> c.id !== id)
+          state.auditCaseList = state.auditCaseList.filter(c => c.id !== id)
+          state.caseList = state.caseList.map(c => {
+            if (c.id === id) {
+              c = res
+            }
+            return c
+          })
           resolve()
         }).catch(err => {
           reject(err)
@@ -46,6 +52,12 @@ export default {
       return new Promise((resolve, reject) => {
         rejectCase(id).then((res) => {
           state.auditCaseList = state.auditCaseList.filter(c => c.id !== id)
+          state.caseList = state.caseList.map(c => {
+            if (c.id === id) {
+              c = res
+            }
+            return c
+          })
           resolve()
         }).catch(err => {
           reject(err)

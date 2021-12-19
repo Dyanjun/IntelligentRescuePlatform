@@ -1,15 +1,39 @@
 <template>
-  <Card>
-    <Row>
-      <paged-table
-        :loading="loading"
-        :columns="columns"
-        :data-source="auditCaseList"
-        :total="auditCaseList.length"
-        style="margin-bottom: 50px"
-      />
-    </Row>
-  </Card>
+  <div>
+    <Card>
+      <Row>
+        <Tabs :animated="false" class="Tabs">
+          <TabPane label="全部">
+            <paged-table
+              :loading="caseLoading"
+              :columns="caseColumns"
+              :data-source="caseList"
+              :total="caseList.length"
+              style="margin-bottom: 50px"
+            />
+          </TabPane>
+          <TabPane label="待审核">
+              <paged-table
+                :loading="loading"
+                :columns="columns"
+                :data-source="auditCaseList"
+                :total="auditCaseList.length"
+                style="margin-bottom: 50px"
+              />
+          </TabPane>
+        </Tabs>
+      </Row>
+    </Card>
+    <Modal v-model="show">
+      <p slot="header" class="end-task-modal"><Icon type="ios-information-circle"></Icon><span>失踪人员详情</span></p>
+      <div style="text-align: left; font-size: large">
+        <Row>姓名：{{missing.name || ''}}</Row>
+        <Row>性别：{{missing.gender || ''}}</Row>
+        <Row>年龄：{{missing.age || ''}}</Row>
+      </div>
+      <div slot="footer"><Button type="primary" size="large" long @click="show=false">关闭</Button></div>
+    </Modal>
+  </div>
 </template>
 
 <script>
@@ -23,6 +47,7 @@ export default {
   data () {
     return {
       loading: true,
+      caseLoading: true,
       columns: [
         {
           title: '丢失时间',
@@ -99,25 +124,84 @@ export default {
             return h('div', buttons)
           }
         }
-      ]
+      ],
+      caseColumns: [
+        {
+          title: '丢失时间',
+          key: 'lost_time'
+        },
+        {
+          title: '紧急程度',
+          key: 'emergency_level'
+        },
+        {
+          title: '描述',
+          key: 'description'
+        },
+        {
+          title: '失踪地址',
+          key: 'place'
+        },
+        {
+          title: '状态',
+          key: 'status'
+        },
+        {
+          title: '操作',
+          key: 'operation',
+          render: (h, { row }) => {
+            const detailButton = h('Button',
+              {
+                props: {
+                  size: 'small',
+                  type: 'primary'
+                },
+                style: {
+                  marginRight: '1%'
+                },
+                on: {
+                  click: () => {
+                    this.showDetail(row)
+                  }
+                }
+              },
+              '查看详情'
+            )
+            const buttons = [detailButton]
+            return h('div', buttons)
+          }
+        }
+      ],
+      show: false,
+      missing: {
+        name: '',
+        gender: '',
+        age: ''
+      }
     }
   },
   mounted () {
     this.refresh()
   },
   computed: mapState({
-    auditCaseList: (state) => state.lostCase.auditCaseList
+    auditCaseList: (state) => state.lostCase.auditCaseList,
+    caseList: (state) => state.lostCase.caseList
   }),
   methods: {
-    ...mapActions(['getAuditCaseAction', 'publishCaseAction', 'rejectCaseAction']),
+    ...mapActions(['getCaseAction', 'getAuditCaseAction', 'publishCaseAction', 'rejectCaseAction']),
     refresh () {
       this.loading = true
       this.getAuditCaseAction().then(() => {
         this.loading = false
       })
+      this.caseLoading = true
+      this.getCaseAction().then(() => {
+        this.caseLoading = false
+      })
     },
     showDetail (item) {
-
+      this.missing = item.missingPerson
+      this.show = true
     },
     publish (id) {
       this.loading = true
