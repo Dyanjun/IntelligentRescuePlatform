@@ -23,7 +23,7 @@ public class MissingPersonConvertUtil {
         return missingPerson;
     }
 
-    static public MissingPersonDTO convertDomain2DTO(MissingPerson domain, List<Place> places, List<Photo> photos){
+    static public MissingPersonDTO convertDomain2DTO(MissingPerson domain, List<Place> places, Photo photo){
         MissingPersonDTO missingPersonDTO = new MissingPersonDTO();
         missingPersonDTO.setId(domain.getId());
         missingPersonDTO.setName(domain.getName());
@@ -34,7 +34,7 @@ public class MissingPersonConvertUtil {
         missingPersonDTO.setDescription(domain.getDescription());
         missingPersonDTO.setFamily_member_id(domain.getFamily_member_id());
         missingPersonDTO.setPlaces(places);
-        missingPersonDTO.setPhotos(photos);
+        missingPersonDTO.setPhoto(photo);
         return missingPersonDTO;
     }
 }

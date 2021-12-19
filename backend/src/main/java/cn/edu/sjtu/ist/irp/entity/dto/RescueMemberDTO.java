@@ -18,4 +18,5 @@ public class RescueMemberDTO {
     String username;
     String password;
     String telephone;
+    Double distance;
 }

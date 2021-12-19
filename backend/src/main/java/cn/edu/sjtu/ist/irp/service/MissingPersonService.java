@@ -34,22 +34,7 @@ public class MissingPersonService {
     PlaceDao placeDao;
 
     public MissingPersonDTO createMissingPerson(MissingPersonDTO dto){
-//    public MissingPersonDTO createMissingPerson(MissingPersonDTO dto, MultipartFile[] files){
         MissingPerson missingPerson1 = missingPersonDao.createMissingPerson(MissingPersonConvertUtil.convertDTO2Domain(dto));
-//        List<Place> placeList = new ArrayList<>();
-//        for(Place place: dto.getPlaces()){
-//            Place place1 = placeDao.createPlace(place);
-//            placeList.add(place1);
-//        }
-//        for(MultipartFile file: files){
-//            PhotoFile photoFile = new PhotoFile();
-//            photoFile.setFile(file);
-//            PhotoFile photoFile1 = photoFileDao.createPhoto(photoFile);
-//            Photo photo = new Photo();
-//            photo.setLost_person_id(missingPerson1.getId());
-//            photo.setUrl(photoFile1.getUrl());
-//            photoDao.createPhoto(photo);
-//        }
         return more(missingPerson1);
     }
 
@@ -69,15 +54,15 @@ public class MissingPersonService {
         List<MissingPersonDTO> DTOList = new ArrayList<>();
         for(MissingPerson domain: list){
             List<Place> places = placeDao.getPlaceByMissingPerson(domain.getId());
-            List<Photo> photos = photoDao.getPhotoByMissingPerson(domain.getId());
-            DTOList.add(MissingPersonConvertUtil.convertDomain2DTO(domain,places,photos));
+            Photo photo = photoDao.getPhotoByMissingPerson(domain.getId());
+            DTOList.add(MissingPersonConvertUtil.convertDomain2DTO(domain,places,photo));
         }
         return DTOList;
     }
 
     private MissingPersonDTO more(MissingPerson domain){
         List<Place> places = placeDao.getPlaceByMissingPerson(domain.getId());
-        List<Photo> photos = photoDao.getPhotoByMissingPerson(domain.getId());
-        return MissingPersonConvertUtil.convertDomain2DTO(domain,places,photos);
+        Photo photo = photoDao.getPhotoByMissingPerson(domain.getId());
+        return MissingPersonConvertUtil.convertDomain2DTO(domain,places,photo);
     }
 }

@@ -24,6 +24,12 @@ public class LostCaseDao {
 
     private final String BaseRescueUrl = "http://202.120.40.86:14642/rmp-resource-service/project/61b5ae6978ae950017f6ec74/resource/rescue_member";
 
+    public Case_RescueMember createCase_RescueMember(Case_RescueMember domain){
+        Map<String, Object> requestParam = BeanMapUtilByReflect.postBeanToMap(domain);
+        LinkedHashMap<String, Object> data = DatabaseUtil.sendPostRequest(BaseRelationUrl,requestParam);
+        return BeanMapUtilByReflect.mapToBean(data, Case_RescueMember.class);
+    }
+
     public LostCase getLostCaseById(Integer id){
         String url = BaseUrl + "/?case.id=" + id.toString();
         List<?> case_data = DatabaseUtil.sendGetRequest(url);
