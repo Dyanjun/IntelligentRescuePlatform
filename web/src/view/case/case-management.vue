@@ -30,6 +30,7 @@
         <Row>姓名：{{missing.name || ''}}</Row>
         <Row>性别：{{missing.gender || ''}}</Row>
         <Row>年龄：{{missing.age || ''}}</Row>
+        <Row>近期照片：<img  src="missing.photo.url"></Row>
       </div>
       <div slot="footer"><Button type="primary" size="large" long @click="show=false">关闭</Button></div>
     </Modal>
@@ -176,7 +177,10 @@ export default {
       missing: {
         name: '',
         gender: '',
-        age: ''
+        age: '',
+        photo: {
+          url: ''
+        }
       }
     }
   },

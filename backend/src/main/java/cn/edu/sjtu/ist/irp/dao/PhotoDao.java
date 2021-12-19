@@ -40,4 +40,11 @@ public class PhotoDao {
         }
         return null;
     }
+
+    public Photo update(Photo photo) {
+        String url = BaseUrl + "/" + photo.getId().toString();
+        Map<String,Object> requestParam = BeanMapUtilByReflect.putBeanToMap(photo);
+        LinkedHashMap<String, Object> data = DatabaseUtil.sendPostRequest(url,requestParam);
+        return BeanMapUtilByReflect.mapToBean(data, Photo.class);
+    }
 }
