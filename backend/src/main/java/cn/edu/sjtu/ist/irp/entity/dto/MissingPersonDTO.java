@@ -20,5 +20,5 @@ public class MissingPersonDTO {
     String description;
     Integer family_member_id;
     List<Place> places;
-    List<Photo> photos;
+    Photo photo;
 }

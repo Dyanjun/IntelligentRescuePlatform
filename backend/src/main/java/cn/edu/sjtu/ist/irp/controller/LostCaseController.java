@@ -1,7 +1,9 @@
 package cn.edu.sjtu.ist.irp.controller;
 
 import cn.edu.sjtu.ist.irp.entity.LostCaseStatus;
+import cn.edu.sjtu.ist.irp.entity.Place;
 import cn.edu.sjtu.ist.irp.entity.dto.LostCaseDTO;
+import cn.edu.sjtu.ist.irp.entity.dto.RescueMemberDTO;
 import cn.edu.sjtu.ist.irp.service.LostCaseService;
 import cn.edu.sjtu.ist.irp.util.response.Result;
 import cn.edu.sjtu.ist.irp.util.response.ResultUtil;
@@ -85,5 +87,10 @@ public class LostCaseController {
     @GetMapping("")
     public Result<List<LostCaseDTO>> getAllLostCase() {
         return ResultUtil.success(lostCaseService.getAllLostCase());
+    }
+
+    @GetMapping("/{caseId}/rescue_member")
+    public Result<List<RescueMemberDTO>> getRescueMemberPlaceByCase(@PathVariable Integer caseId){
+        return ResultUtil.success(lostCaseService.getRescueMemberPlaceByCase(caseId));
     }
 }
