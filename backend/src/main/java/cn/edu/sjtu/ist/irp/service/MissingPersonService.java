@@ -34,7 +34,10 @@ public class MissingPersonService {
     PlaceDao placeDao;
 
     public MissingPersonDTO createMissingPerson(MissingPersonDTO dto){
+        Integer photoId = dto.getPhoto().getId();
         MissingPerson missingPerson1 = missingPersonDao.createMissingPerson(MissingPersonConvertUtil.convertDTO2Domain(dto));
+        Photo photo = photoDao.getPhotoById(photoId);
+        photo.setLost_person_id(missingPerson1.getId());
         return more(missingPerson1);
     }
 
