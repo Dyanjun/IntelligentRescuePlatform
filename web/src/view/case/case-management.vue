@@ -54,6 +54,10 @@ export default {
       caseLoading: true,
       columns: [
         {
+          title: 'id',
+          key: 'id'
+        },
+        {
           title: '丢失时间',
           key: 'lost_time'
         },
@@ -67,7 +71,8 @@ export default {
         },
         {
           title: '失踪地址',
-          key: 'place'
+          key: 'place',
+          render: (h, { row }) => h('span', row.place.address || '')
         },
         {
           title: '操作',
@@ -131,6 +136,10 @@ export default {
       ],
       caseColumns: [
         {
+          title: 'id',
+          key: 'id'
+        },
+        {
           title: '丢失时间',
           key: 'lost_time'
         },
@@ -144,7 +153,8 @@ export default {
         },
         {
           title: '失踪地址',
-          key: 'place'
+          key: 'place',
+          render: (h, { row }) => h('span', row.place.address || '')
         },
         {
           title: '状态',

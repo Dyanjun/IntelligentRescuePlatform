@@ -5,6 +5,7 @@ import cn.edu.sjtu.ist.irp.entity.*;
 import cn.edu.sjtu.ist.irp.entity.dto.LostCaseDTO;
 import cn.edu.sjtu.ist.irp.entity.dto.RescueMemberDTO;
 import cn.edu.sjtu.ist.irp.util.GeoUtil;
+import cn.edu.sjtu.ist.irp.util.HttpURLConnectionUtil;
 import cn.edu.sjtu.ist.irp.util.WxUtil;
 import cn.edu.sjtu.ist.irp.util.convert.LostCaseConvertUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,8 +71,11 @@ public class LostCaseService {
     }
 
     public LostCaseDTO createLostCase(LostCaseDTO lostCaseDTO){
-        
-        Place place = placeDao.createPlace(lostCaseDTO.getPlace());
+        Place p = lostCaseDTO.getPlace();
+        String addr = HttpURLConnectionUtil.findByLatAndLng(p.getLongitude().toString(), p.getLatitude().toString());
+        System.out.print(addr);
+        p.setAddress(addr);
+        Place place = placeDao.createPlace(p);
 
         LostCase lostCase= LostCaseConvertUtil.convertDTO2Domain(lostCaseDTO, place.getId());
 
@@ -149,6 +153,22 @@ public class LostCaseService {
     }
 
 
+    public LostCaseDTO finishLostCase(Integer id) {
+        LostCase lostCase = lostCaseDao.getLostCaseById(id);
+        if(lostCase.getStatus() == LostCaseStatus.PROCEEDING){
+            lostCase.setStatus(LostCaseStatus.FINISHED);
+            LostCase lostCase1 = lostCaseDao.updateLostCase(lostCase);
+
+            List<RescueMember> rescueMemberList = lostCaseDao.getAllRescueMember(id);
+            for(RescueMember rescueMember : rescueMemberList){
+                rescueMemberDao.updateStatus(rescueMember.getId(), RescueMemberStatus.FREE);
+            }
+            return more(lostCase1);
+        }
+        else{
+            throw new RuntimeException("案件未处于进行中");
+        }
+    }
 
     public List<RescueMemberDTO> getRescueMemberPlaceByCase(Integer caseId) {
         List<RescueMember> rescueMemberList = lostCaseDao.getAllRescueMember(caseId);
