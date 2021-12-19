@@ -6,11 +6,11 @@ import cn.edu.sjtu.ist.irp.dao.PlaceDao;
 import cn.edu.sjtu.ist.irp.dao.UserDao;
 import cn.edu.sjtu.ist.irp.entity.*;
 import cn.edu.sjtu.ist.irp.entity.dto.LostCaseDTO;
-import cn.edu.sjtu.ist.irp.entity.dto.MissingPersonDTO;
+import cn.edu.sjtu.ist.irp.entity.dto.RescueMemberDTO;
 import cn.edu.sjtu.ist.irp.util.convert.LostCaseConvertUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.beans.BeanUtils;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +29,9 @@ public class LostCaseService {
 
     @Autowired
     MissingPersonDao missingPersonDao;
+
+    @Autowired
+    UserDao userDao;
 
     public List<LostCaseDTO> getLostCaseByFamilyMember(Integer id){
         List<LostCase> lostCaseList = lostCaseDao.getLostCaseByFamilyMember(id);
@@ -105,6 +108,22 @@ public class LostCaseService {
         }
     }
 
+
+
+    public List<RescueMemberDTO> getRescueMemberPlaceByCase(Integer caseId) {
+        List<RescueMember> rescueMemberList = lostCaseDao.getAllRescueMember(caseId);
+        List<RescueMemberDTO> rescueMemberDTOList = new ArrayList<>();
+        for(RescueMember rescueMember: rescueMemberList){
+            if(rescueMember.getPlace_id() == null) continue;
+            Place place = placeDao.getPlaceById(rescueMember.getPlace_id());
+            RescueMemberDTO rescueMemberDTO = new RescueMemberDTO();
+            BeanUtils.copyProperties(rescueMember,rescueMemberDTO);
+            rescueMemberDTO.setPlace(place);
+            rescueMemberDTOList.add(rescueMemberDTO);
+        }
+        return rescueMemberDTOList;
+    }
+
     private List<LostCaseDTO> moreList(List<LostCase> lostCaseList){
         List<LostCaseDTO> lostCaseDTOList = new ArrayList<>();
         for(LostCase lostCase: lostCaseList){
@@ -120,6 +139,5 @@ public class LostCaseService {
         MissingPerson missingPerson = missingPersonDao.getMissingPersonById(lostCase.getMissing_person_id());
         return LostCaseConvertUtil.convertDomain2DTO(lostCase,missingPerson,place);
     }
-
 
 }
