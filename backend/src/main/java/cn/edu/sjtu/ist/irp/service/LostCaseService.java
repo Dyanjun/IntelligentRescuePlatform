@@ -71,7 +71,7 @@ public class LostCaseService {
     }
 
     public LostCaseDTO createLostCase(LostCaseDTO lostCaseDTO){
-
+        
         Place place = placeDao.createPlace(lostCaseDTO.getPlace());
 
         LostCase lostCase= LostCaseConvertUtil.convertDTO2Domain(lostCaseDTO, place.getId());

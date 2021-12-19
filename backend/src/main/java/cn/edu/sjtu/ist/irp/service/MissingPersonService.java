@@ -35,11 +35,14 @@ public class MissingPersonService {
 
     public MissingPersonDTO createMissingPerson(MissingPersonDTO dto){
         MissingPerson missingPerson1 = missingPersonDao.createMissingPerson(MissingPersonConvertUtil.convertDTO2Domain(dto));
+        Photo photo = dto.getPhoto();
+        photo.setLost_person_id(missingPerson1.getId());
+        photoDao.createPhoto(photo);
         return more(missingPerson1);
     }
 
-    public MissingPerson getMissingPersonById(Integer id){
-        return missingPersonDao.getMissingPersonById(id);
+    public MissingPersonDTO getMissingPersonById(Integer id){
+        return more(missingPersonDao.getMissingPersonById(id));
     }
 
     public MissingPersonDTO getMissingPersonByCase(Integer id){

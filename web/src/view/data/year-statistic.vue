@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="yearId" style="width: 90%;height:500px"></div>
+    <div id="yearId" style="width: 90%; height:500px"></div>
   </div>
 </template>
 
@@ -63,7 +63,7 @@ export default {
         xAxis: [
           {
             type: 'category',
-            data: ['60岁及以下', '61-65岁', '66-70岁', '71-75岁', '76-80岁', '81-85岁', '86岁及以上'],
+            data: ['2015', '2016', '2017', '2018', '2019', '2020', '2021'],
             axisPointer: {
               type: 'shadow'
             }
@@ -95,18 +95,18 @@ export default {
           {
             name: '女性',
             type: 'bar',
-            data: this.femaleList
+            data: [1, 0, 0, 0, 0, 0, 14]
           },
           {
             name: '男性',
             type: 'bar',
-            data: this.maleList
+            data: [1, 0, 0, 1, 0, 0, 7]
           },
           {
             name: '总数',
             type: 'line',
             yAxisIndex: 1,
-            data: this.allList
+            data: [2, 0, 0, 1, 0, 0, 21]
           }
         ]
       }

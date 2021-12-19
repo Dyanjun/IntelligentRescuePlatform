@@ -1,5 +1,6 @@
 package cn.edu.sjtu.ist.irp.entity.dto;
 
+import cn.edu.sjtu.ist.irp.entity.Photo;
 import cn.edu.sjtu.ist.irp.entity.Place;
 import lombok.Data;
 
@@ -20,4 +21,6 @@ public class ClueDTO {
     Integer case_id;
 
     Place place;
+
+    Photo photo;
 }

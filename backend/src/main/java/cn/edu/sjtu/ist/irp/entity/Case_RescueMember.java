@@ -1,7 +1,6 @@
 package cn.edu.sjtu.ist.irp.entity;
 
 import lombok.Data;
-import org.omg.PortableInterceptor.INACTIVE;
 
 /**
  * @author dyanjun

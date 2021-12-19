@@ -30,6 +30,8 @@
         <Row>姓名：{{missing.name || ''}}</Row>
         <Row>性别：{{missing.gender || ''}}</Row>
         <Row>年龄：{{missing.age || ''}}</Row>
+        <Row>近期照片：</Row>
+        <Row><img :src="url" style="width: 400px"></Row>
       </div>
       <div slot="footer"><Button type="primary" size="large" long @click="show=false">关闭</Button></div>
     </Modal>
@@ -39,6 +41,8 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 import PagedTable from '_c/paged-table/paged-table.vue'
+import { getMissingPerson } from '@/api/missingPerson'
+import { caseStatusNames } from '@/constants/caseStatus'
 export default {
   name: 'case-management',
   components: {
@@ -144,7 +148,8 @@ export default {
         },
         {
           title: '状态',
-          key: 'status'
+          key: 'status',
+          render: (h, { row }) => h('span', caseStatusNames[row.status])
         },
         {
           title: '操作',
@@ -177,7 +182,8 @@ export default {
         name: '',
         gender: '',
         age: ''
-      }
+      },
+      url: ''
     }
   },
   mounted () {
@@ -189,6 +195,7 @@ export default {
   }),
   methods: {
     ...mapActions(['getCaseAction', 'getAuditCaseAction', 'publishCaseAction', 'rejectCaseAction']),
+    getMissingPerson,
     refresh () {
       this.loading = true
       this.getAuditCaseAction().then(() => {
@@ -200,8 +207,14 @@ export default {
       })
     },
     showDetail (item) {
-      this.missing = item.missingPerson
-      this.show = true
+      this.show = false
+      this.getMissingPerson(item.missingPerson.id).then((res) => {
+        this.missing = res
+        this.url = res.photo == null ? '' : res.photo.url
+        this.show = true
+      }).catch(e => {
+        this.$Message.error(e.message)
+      })
     },
     publish (id) {
       this.loading = true
@@ -209,7 +222,7 @@ export default {
         this.loading = false
         this.$Message.success('案件发布成功')
       }).catch(e => {
-        this.$Message.error(e.message())
+        this.$Message.error(e.message)
       })
     },
     reject (id) {
@@ -218,7 +231,7 @@ export default {
         this.loading = false
         this.$Message.success('案件驳回成功')
       }).catch(e => {
-        this.$Message.error(e.message())
+        this.$Message.error(e.message)
       })
     }
   }

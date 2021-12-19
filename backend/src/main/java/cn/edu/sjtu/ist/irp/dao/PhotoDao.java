@@ -31,6 +31,16 @@ public class PhotoDao {
         return null;
     }
 
+    public Photo getPhotoByClue(Integer id){
+        String url = BaseUrl + "/?photo.clue_id="+id.toString();
+        List<?> data = DatabaseUtil.sendGetRequest(url);
+        if(data.size()>0){
+            Photo photo = BeanMapUtilByReflect.mapToBean((LinkedHashMap<String, Object>) data.get(0), Photo.class);
+            return photo;
+        }
+        return null;
+    }
+
     public Photo getPhotoByMissingPerson(Integer id){
         String url = BaseUrl + "/?photo.lost_person_id="+id.toString();
         List<?> data = DatabaseUtil.sendGetRequest(url);
@@ -39,5 +49,12 @@ public class PhotoDao {
             return photo;
         }
         return null;
+    }
+
+    public Photo update(Photo photo) {
+        String url = BaseUrl + "/" + photo.getId().toString();
+        Map<String,Object> requestParam = BeanMapUtilByReflect.putBeanToMap(photo);
+        LinkedHashMap<String, Object> data = DatabaseUtil.sendPutRequest(url,requestParam);
+        return BeanMapUtilByReflect.mapToBean(data, Photo.class);
     }
 }
