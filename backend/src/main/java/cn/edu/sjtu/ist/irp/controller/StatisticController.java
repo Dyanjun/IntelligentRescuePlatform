@@ -1,8 +1,6 @@
 package cn.edu.sjtu.ist.irp.controller;
 
-import cn.edu.sjtu.ist.irp.entity.MissingPerson;
 import cn.edu.sjtu.ist.irp.entity.dto.LostCaseDTO;
-import cn.edu.sjtu.ist.irp.entity.dto.MissingPersonDTO;
 import cn.edu.sjtu.ist.irp.service.LostCaseService;
 import cn.edu.sjtu.ist.irp.service.MissingPersonService;
 import cn.edu.sjtu.ist.irp.util.response.Result;
