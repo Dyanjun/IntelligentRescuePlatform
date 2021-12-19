@@ -84,7 +84,6 @@ public class LostCaseDao {
                     lostCaseList.add(lostCase);
                 }
             }
-        }
         return lostCaseList;
     }
 

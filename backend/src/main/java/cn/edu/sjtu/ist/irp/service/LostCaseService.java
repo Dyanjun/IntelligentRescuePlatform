@@ -43,7 +43,6 @@ public class LostCaseService {
 
     public List<LostCaseDTO> getLostCaseByFamilyMember(Integer id){
         List<LostCase> lostCaseList = lostCaseDao.getLostCaseByFamilyMember(id);
-        System.out.println(lostCaseList);
         return moreList(lostCaseList);
     }
 

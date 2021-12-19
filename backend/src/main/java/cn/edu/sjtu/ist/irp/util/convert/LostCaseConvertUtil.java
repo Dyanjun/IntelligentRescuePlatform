@@ -26,6 +26,7 @@ public class LostCaseConvertUtil {
         lostCase.setMissing_person_id((Integer) obj.get("missing_person_id"));
         lostCase.setStatus(LostCaseStatus.fromString((String) obj.get("status")));
         lostCase.setLost_place_id((Integer) obj.get("lost_place_id"));
+
         return lostCase;
     }
 

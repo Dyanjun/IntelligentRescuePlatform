@@ -60,7 +60,6 @@ public class MissingPersonService {
             Photo photo = photoDao.getPhotoByMissingPerson(domain.getId());
             DTOList.add(MissingPersonConvertUtil.convertDomain2DTO(domain,places,photo));
         }
-        System.out.println(DTOList);
         return DTOList;
     }
 
