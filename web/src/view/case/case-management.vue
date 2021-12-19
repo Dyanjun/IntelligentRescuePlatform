@@ -42,7 +42,14 @@
 import { mapActions, mapState } from 'vuex'
 import PagedTable from '_c/paged-table/paged-table.vue'
 import { getMissingPerson } from '@/api/missingPerson'
-import { caseStatusNames } from '@/constants/caseStatus'
+import { caseStatusNames, AUDITING, PROCEEDING, REJECED, FINISHED } from '@/constants/caseStatus'
+
+const styles = {
+  'AUDITING': 'orange',
+  'PROCEEDING': 'blue',
+  'REJECTED': 'red',
+  'FINISHED': 'green'
+}
 export default {
   name: 'case-management',
   components: {
@@ -159,7 +166,11 @@ export default {
         {
           title: '状态',
           key: 'status',
-          render: (h, { row }) => h('span', caseStatusNames[row.status])
+          render: (h, { row }) => h('tag', {
+            props: {
+              color: styles[row.status]
+            }
+          }, caseStatusNames[row.status])
         },
         {
           title: '操作',
