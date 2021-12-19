@@ -28,21 +28,7 @@ public class LostCaseConvertUtil {
         lostCase.setLost_place_id((Integer) obj.get("lost_place_id"));
         return lostCase;
     }
-    Integer id;
 
-    String lost_time;
-
-    String emergency_level;
-
-    Integer rescue_num;
-
-    String description;
-
-    MissingPersonDTO missingPerson;
-
-    LostCaseStatus status= LostCaseStatus.AUDITING;
-
-    Place place;
     public static LostCaseDTO convertDomain2DTO(LostCase lostCase, MissingPerson missingPerson, Place place){
         LostCaseDTO lostCaseDTO = new LostCaseDTO();
         lostCaseDTO.setId(lostCase.getId());

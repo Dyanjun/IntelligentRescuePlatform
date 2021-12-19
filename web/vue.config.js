@@ -42,7 +42,7 @@ module.exports = {
     proxy: {
       // 配置跨域
       '/api': {
-        target: 'http://localhost:8000', // 这里填写你后台接口
+        target: 'http://localhost:8080', // 这里填写你后台接口
         pathRewrite: {
           '^/api': '' // 请求的时候使用这个api就可以
         }

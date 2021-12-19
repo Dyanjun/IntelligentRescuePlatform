@@ -49,7 +49,7 @@ public class PlaceDao {
 
     public Place putPlace(Place domain){
         Map<String, Object> requestParam = BeanMapUtilByReflect.putBeanToMap(domain);
-        LinkedHashMap<String, Object> data = DatabaseUtil.sendPutRequest(BaseUrl,requestParam);
+        LinkedHashMap<String, Object> data = DatabaseUtil.sendPutRequest(BaseUrl + "/" + domain.getId().toString(),requestParam);
         return BeanMapUtilByReflect.mapToBean(data, Place.class);
     }
 }

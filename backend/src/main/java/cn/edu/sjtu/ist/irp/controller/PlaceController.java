@@ -22,7 +22,7 @@ public class PlaceController {
     PlaceDao placeDao;
 
     @GetMapping("/{id}")
-    public Result<Place> loginFamilyMember(@PathVariable Integer id){
+    public Result<Place> getPlaceById(@PathVariable Integer id){
         return ResultUtil.success(placeDao.getPlaceById(id));
     }
 }

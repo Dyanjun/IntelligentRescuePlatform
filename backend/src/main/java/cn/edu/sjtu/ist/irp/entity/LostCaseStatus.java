@@ -7,6 +7,7 @@ package cn.edu.sjtu.ist.irp.entity;
 public enum LostCaseStatus {
     AUDITING("AUDITING"),
     PROCEEDING("PROCEEDING"),
+    REJECTED("REJECTED"),
     SUCCESS("SUCCESS"),
     FAILED("FAILED");
 
