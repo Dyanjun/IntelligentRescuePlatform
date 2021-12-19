@@ -90,15 +90,6 @@ export default [
         icon: 'logo-buffer'
       },
       component: () => import('@/view/case/case-management.vue')
-    },
-    {
-      path: 'all',
-      name: '所有案件',
-      meta: {
-        title: '所有案件',
-        icon: 'logo-buffer'
-      },
-      component: () => import('@/view/case/case-management.vue')
     }]
   },
   {

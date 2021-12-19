@@ -1,12 +1,10 @@
 package cn.edu.sjtu.ist.irp.dao;
 
-import cn.edu.sjtu.ist.irp.entity.Case_RescueMember;
-import cn.edu.sjtu.ist.irp.entity.LostCase;
-import cn.edu.sjtu.ist.irp.entity.LostCaseStatus;
-import cn.edu.sjtu.ist.irp.entity.MissingPerson;
+import cn.edu.sjtu.ist.irp.entity.*;
 import cn.edu.sjtu.ist.irp.util.DatabaseUtil;
 import cn.edu.sjtu.ist.irp.util.convert.BeanMapUtilByReflect;
 import cn.edu.sjtu.ist.irp.util.convert.LostCaseConvertUtil;
+import cn.edu.sjtu.ist.irp.util.convert.RescueMemberConvertUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import java.util.*;
@@ -23,6 +21,14 @@ public class LostCaseDao {
     private final String BaseRelationUrl = "http://202.120.40.86:14642/rmp-resource-service/project/61b5ae6978ae950017f6ec74/resource/case_rescue_member";
 
     private final String BaseMissingUrl = "http://202.120.40.86:14642/rmp-resource-service/project/61b5ae6978ae950017f6ec74/resource/missing_person";
+
+    private final String BaseRescueUrl = "http://202.120.40.86:14642/rmp-resource-service/project/61b5ae6978ae950017f6ec74/resource/rescue_member";
+
+    public Case_RescueMember createCase_RescueMember(Case_RescueMember domain){
+        Map<String, Object> requestParam = BeanMapUtilByReflect.postBeanToMap(domain);
+        LinkedHashMap<String, Object> data = DatabaseUtil.sendPostRequest(BaseRelationUrl,requestParam);
+        return BeanMapUtilByReflect.mapToBean(data, Case_RescueMember.class);
+    }
 
     public LostCase getLostCaseById(Integer id){
         String url = BaseUrl + "/?case.id=" + id.toString();
@@ -42,6 +48,22 @@ public class LostCaseDao {
             lostCaseList.add(lostCase);
         }
         return lostCaseList;
+    }
+
+    public List<RescueMember> getAllRescueMember(Integer id){
+        String allUrl =  BaseRelationUrl + "/?case_rescue_member.case_id=" + id.toString();
+        List<?> data = DatabaseUtil.sendGetRequest(allUrl);
+        List<RescueMember> rescueMemberList = new ArrayList<>();
+        for(Object obj : data){
+            Case_RescueMember case_rescueMember = BeanMapUtilByReflect.mapToBean((LinkedHashMap<String, Object>) obj, Case_RescueMember.class);
+            String url = BaseRescueUrl + "/?rescue_member.id=" + case_rescueMember.getRescue_member_id();
+            List<?> rescue_member_data = DatabaseUtil.sendGetRequest(url);
+            if(rescue_member_data.size()>0){
+                RescueMember rescueMember = RescueMemberConvertUtil.convertPo2Domain((LinkedHashMap<String, Object>) rescue_member_data.get(0));
+                rescueMemberList.add(rescueMember);
+            }
+        }
+        return rescueMemberList;
     }
 
     /**
