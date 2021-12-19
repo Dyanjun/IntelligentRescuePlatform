@@ -1,0 +1,67 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="title">
+    <image class="logo" src="https://vi.sjtu.edu.cn/uploads/files/caf2f5045c47308250fab3812dfe2003-6896b91594f238b24e67696224948251.png"></image>
+    <text>  IST智能救援平台客户端</text>
+  </view>
+
+  <view class="subtitle"> 
+    <text>帮助中心</text>  
+  </view>
+
+  <view class="subsubtitle"> 
+    <text>派出所</text>  
+  </view>
+
+  <view class="table">
+    <view class="tr bg-w">
+      <view class="id_th">id</view>
+      <view class="th">名称</view>
+      <view class="th">地址</view>
+      <view class="th">联系电话</view>
+      <view class="th">营业时间</view>
+    </view>
+    <view
+      wx:for="{{policeStationList}}"
+      wx:for-item="item"
+      wx:for-index="index"
+      wx:key="key"
+      >
+      <view class="tr bg-g">
+        <view class="id_td">{{item.id}}</view>
+        <view class="td">{{item.name}}</view>
+        <view class="td">{{item.address}}</view>
+        <view class="td">{{item.telephone}}</view>
+        <view class="td">{{item.time}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="subsubtitle"> 
+    <text>医院</text>  
+  </view>
+  
+  <view class="table">
+    <view class="tr bg-w">
+      <view class="id_th">id</view>
+      <view class="th">名称</view>
+      <view class="th">地址</view>
+      <view class="th">联系电话</view>
+      <view class="th">营业时间</view>
+    </view>
+    <view
+      wx:for="{{hospitalList}}"
+      wx:for-item="item"
+      wx:for-index="index"
+      wx:key="key"
+      >
+      <view class="tr bg-g">
+        <view class="id_td">{{item.id}}</view>
+        <view class="td">{{item.name}}</view>
+        <view class="td">{{item.address}}</view>
+        <view class="td">{{item.telephone}}</view>
+        <view class="td">{{item.time}}</view>
+      </view>
+    </view>
+  </view>
+</view>

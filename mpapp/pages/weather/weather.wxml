@@ -1,0 +1,40 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="title">
+    <image class="logo" src="https://vi.sjtu.edu.cn/uploads/files/caf2f5045c47308250fab3812dfe2003-6896b91594f238b24e67696224948251.png"></image>
+    <text>  IST智能救援平台客户端</text>
+  </view>
+
+  <view class="subtitle"> 
+    <text>天气信息</text>  
+  </view>
+  
+  <view class="content">
+    <view class="cube">
+      <view class="line"> 
+      <label>天气:</label>
+      <text>{{weatherInfo.weather}}</text>
+    </view>
+    <view class="line"> 
+      <label>风向:</label>
+      <text>{{weatherInfo.winddirection}}</text>
+    </view>
+    <view class="line"> 
+      <label>风力:</label>
+      <text>{{weatherInfo.windpower}}级</text>
+    </view>
+    <view class="line"> 
+      <label>温度:</label>
+      <text>{{weatherInfo.temperature}}℃</text>
+    </view>
+    <view class="line"> 
+      <label>湿度:</label>
+      <text>{{weatherInfo.humidity}}%</text>
+    </view>
+    <view class="line"> 
+      <label>更新时间:</label>
+      <text>{{weatherInfo.reporttime}}</text>
+    </view>
+    </view>
+  </view>
+</view>
