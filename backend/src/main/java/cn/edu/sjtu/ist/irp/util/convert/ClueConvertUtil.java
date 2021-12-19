@@ -19,6 +19,7 @@ public class ClueConvertUtil {
         dto.setDescription(clue.getDescription());
         dto.setPlace(place);
         dto.setPhoto(photo);
+        dto.setSimilarity(Math.random());
         return dto;
     }
 

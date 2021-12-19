@@ -17,6 +17,7 @@ public class RescueMemberConvertUtil {
 
         domain.setId((Integer) obj.get("id"));
         domain.setName((String) obj.get("name"));
+        domain.setTelephone((String) obj.get("telephone"));
         domain.setUsername((String) obj.get("username"));
         domain.setPassword((String)obj.get("password"));
         domain.setDescription((String) obj.get("description"));

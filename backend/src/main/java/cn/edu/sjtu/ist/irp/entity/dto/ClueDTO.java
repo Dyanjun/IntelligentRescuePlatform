@@ -23,4 +23,6 @@ public class ClueDTO {
     Place place;
 
     Photo photo;
+
+    Double similarity;
 }

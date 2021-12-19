@@ -42,7 +42,14 @@
 import { mapActions, mapState } from 'vuex'
 import PagedTable from '_c/paged-table/paged-table.vue'
 import { getMissingPerson } from '@/api/missingPerson'
-import { caseStatusNames } from '@/constants/caseStatus'
+import { caseStatusNames, AUDITING, PROCEEDING, REJECED, FINISHED } from '@/constants/caseStatus'
+
+const styles = {
+  'AUDITING': 'orange',
+  'PROCEEDING': 'blue',
+  'REJECTED': 'red',
+  'FINISHED': 'green'
+}
 export default {
   name: 'case-management',
   components: {
@@ -53,6 +60,10 @@ export default {
       loading: true,
       caseLoading: true,
       columns: [
+        {
+          title: 'id',
+          key: 'id'
+        },
         {
           title: '丢失时间',
           key: 'lost_time'
@@ -67,7 +78,8 @@ export default {
         },
         {
           title: '失踪地址',
-          key: 'place'
+          key: 'place',
+          render: (h, { row }) => h('span', row.place.address || '')
         },
         {
           title: '操作',
@@ -131,6 +143,10 @@ export default {
       ],
       caseColumns: [
         {
+          title: 'id',
+          key: 'id'
+        },
+        {
           title: '丢失时间',
           key: 'lost_time'
         },
@@ -144,12 +160,17 @@ export default {
         },
         {
           title: '失踪地址',
-          key: 'place'
+          key: 'place',
+          render: (h, { row }) => h('span', row.place.address || '')
         },
         {
           title: '状态',
           key: 'status',
-          render: (h, { row }) => h('span', caseStatusNames[row.status])
+          render: (h, { row }) => h('tag', {
+            props: {
+              color: styles[row.status]
+            }
+          }, caseStatusNames[row.status])
         },
         {
           title: '操作',

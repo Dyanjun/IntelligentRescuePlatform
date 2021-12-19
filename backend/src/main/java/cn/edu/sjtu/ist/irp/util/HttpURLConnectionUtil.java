@@ -1,22 +1,17 @@
 package cn.edu.sjtu.ist.irp.util;
 
-import net.sf.json.JSONObject;
-import org.apache.http.Consts;
+
+import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 /**
@@ -25,6 +20,40 @@ import java.util.Map;
  */
 public class HttpURLConnectionUtil {
     private static final CloseableHttpClient httpclient = HttpClients.createDefault();
+
+    public static String findByLatAndLng(String lng, String lat) {
+        try {
+            //移除坐标前后的 空格
+            /*lng = lng.trim();
+            lat = lat.trim();*/
+;
+            // url中的ak值要替换成自己的:
+            String url = "http://api.map.baidu.com/reverse_geocoding/v3/?ak=RBY6QoIZfYUGNNCOPm5QhwQtMxojd7g5&output=json&coordtype=wgs84ll&location=" + lng + "," + lat;
+            //System.out.println(url);
+            HttpGet httpGet = new HttpGet(url);
+
+            CloseableHttpResponse response = httpclient.execute(httpGet);
+
+            HttpEntity httpEntity = response.getEntity();
+
+            String json = EntityUtils.toString(httpEntity);
+
+            Map<String, Object> result = JSONObject.parseObject(json, Map.class);
+
+            if (result.get("status").equals(0)) {
+                Map<String, Object> resultMap = (Map<String, Object>) result.get("result");
+                resultMap = (Map<String, Object>) resultMap.get("addressComponent");
+                String country = (String) resultMap.get("country");
+                String province = (String) resultMap.get("province");
+                String city = (String) resultMap.get("city");
+                return country + province + city;
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     /**
      * 发送HttpGet请求
