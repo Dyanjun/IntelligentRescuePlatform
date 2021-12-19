@@ -75,4 +75,10 @@ public class UserDao {
         LinkedHashMap<String, Object> data = DatabaseUtil.sendPostRequest(RescueMemberBaseUrl,requestParam);
         return RescueMemberConvertUtil.convertPo2Domain(data);
     }
+
+    public RescueMember putRescueMember(RescueMember domain) {
+        Map<String, Object> requestParam = BeanMapUtilByReflect.putBeanToMap(domain);
+        LinkedHashMap<String, Object> data = DatabaseUtil.sendPutRequest(RescueMemberBaseUrl + "/" + domain.getId().toString(),requestParam);
+        return RescueMemberConvertUtil.convertPo2Domain(data);
+    }
 }

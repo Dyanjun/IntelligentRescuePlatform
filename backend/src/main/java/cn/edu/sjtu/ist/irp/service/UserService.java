@@ -51,6 +51,12 @@ public class UserService {
 
     public void updateRescueMember(Integer id, Place place) {
         RescueMember rescueMember = userDao.getRescueMemberById(id);
+        if(rescueMember.getPlace_id() == null){
+            Place place2 = placeDao.createPlace(place);
+            rescueMember.setPlace_id(place2.getId());
+            userDao.putRescueMember(rescueMember);
+            return;
+        }
         Place place1 = placeDao.getPlaceById(rescueMember.getPlace_id());
         place.setId(place1.getId());
         placeDao.putPlace(place);
