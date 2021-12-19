@@ -49,22 +49,22 @@ public class LostCaseDao {
      * @param id 家属id
      * @return List<LostCase>
      */
-    public List<LostCase> getLostCaseByFamilyMember(Integer id){
-            String familyUrl = BaseMissingUrl + "/?missing_person.family_member_id="+ id.toString();
-            List<?> data = DatabaseUtil.sendGetRequest(familyUrl);
-            List<LostCase> lostCaseList = new ArrayList<>();
-            for(Object obj: data){
-                MissingPerson missingPerson = BeanMapUtilByReflect.mapToBean((LinkedHashMap<String, Object>) obj, MissingPerson.class);
-                String url = BaseUrl + "/?case.missing_person_id=" + missingPerson.getId().toString();
-                List<?> case_data = DatabaseUtil.sendGetRequest(url);
-                for(Object case_obj : case_data){
-                    LostCase lostCase = LostCaseConvertUtil.convertPo2Domain((LinkedHashMap<String, Object>) case_obj);
-                    lostCaseList.add(lostCase);
-                }
+    public List<LostCase> getLostCaseByFamilyMember(Integer id) {
+        String familyUrl = BaseMissingUrl + "/?missing_person.family_member_id=" + id.toString();
+        List<?> data = DatabaseUtil.sendGetRequest(familyUrl);
+        List<LostCase> lostCaseList = new ArrayList<>();
+        for (Object obj : data) {
+            MissingPerson missingPerson = BeanMapUtilByReflect.mapToBean((LinkedHashMap<String, Object>) obj, MissingPerson.class);
+            String url = BaseUrl + "/?case.missing_person_id=" + missingPerson.getId().toString();
+            List<?> case_data = DatabaseUtil.sendGetRequest(url);
+            for (Object case_obj : case_data) {
+                LostCase lostCase = LostCaseConvertUtil.convertPo2Domain((LinkedHashMap<String, Object>) case_obj);
+                lostCaseList.add(lostCase);
             }
         }
         return lostCaseList;
     }
+
 
     /**
      * 通过救援人员的id，获取其参与过的所有案件
