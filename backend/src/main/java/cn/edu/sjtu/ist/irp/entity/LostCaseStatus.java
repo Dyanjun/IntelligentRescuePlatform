@@ -8,9 +8,7 @@ public enum LostCaseStatus {
     AUDITING("AUDITING"),
     PROCEEDING("PROCEEDING"),
     REJECTED("REJECTED"),
-    SUCCESS("SUCCESS"),
-    FAILED("FAILED");
-
+    FINISHED("FINISHED");
     /**
      * 状态
      */

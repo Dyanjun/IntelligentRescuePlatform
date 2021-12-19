@@ -46,7 +46,7 @@ export default [
           notCache: true,
           icon: 'md-home'
         },
-        component: () => import('@/view/single-page/home')
+        component: () => import('@/view/case/case-management.vue')
       }
     ]
   },
@@ -80,14 +80,14 @@ export default [
     component: Main,
     meta: {
       title: '案件管理',
-      icon: 'logo-buffer'
+      icon: 'md-build'
     },
     children: [{
       path: 'audit',
       name: '审核案件',
       meta: {
-        title: '审核案件',
-        icon: 'logo-buffer'
+        title: '案件管理',
+        icon: 'md-build'
       },
       component: () => import('@/view/case/case-management.vue')
     }]
@@ -105,7 +105,7 @@ export default [
       name: '地理热力图',
       meta: {
         title: '地理热力图',
-        icon: 'logo-buffer'
+        icon: 'ios-analytics'
       },
       component: () => import('@/view/data/place-heat-statistic.vue')
     },
@@ -114,7 +114,7 @@ export default [
       name: '各类数据分析',
       meta: {
         title: '各类数据分析',
-        icon: 'logo-buffer'
+        icon: 'md-list-box'
       },
       component: () => import('@/view/data/data-management.vue')
     }

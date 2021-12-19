@@ -67,7 +67,7 @@ export default {
             type: 'heatmap',
             coordinateSystem: 'bmap',
             data: this.locationCarsList,
-            pointSize: 5,
+            pointSize: 15,
             blurSize: 6
           }
         ]

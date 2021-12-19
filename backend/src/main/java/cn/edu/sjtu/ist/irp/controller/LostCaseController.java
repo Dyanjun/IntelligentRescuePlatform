@@ -50,6 +50,15 @@ public class LostCaseController {
     }
 
     /**
+     * 拒绝走失案例
+     */
+    @PostMapping("/{id}/finish")
+    public Result<LostCaseDTO> finishLostCase(@PathVariable Integer id) {
+        return ResultUtil.success(lostCaseService.finishLostCase(id));
+    }
+
+
+    /**
      * 救援人员获取正在参与的走失案例
      */
     @GetMapping("/rescue_member/{id}/proceeding")
