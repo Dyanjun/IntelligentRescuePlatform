@@ -71,9 +71,12 @@ public class LostCaseService {
     }
 
     public LostCaseDTO createLostCase(LostCaseDTO lostCaseDTO){
+        if(missingPersonDao.getMissingPersonById(lostCaseDTO.getMissingPerson().getId()) == null){
+            throw new RuntimeException("失踪人员信息不存在");
+        }
+
         Place p = lostCaseDTO.getPlace();
         String addr = HttpURLConnectionUtil.findByLatAndLng(p.getLongitude().toString(), p.getLatitude().toString());
-        System.out.print(addr);
         p.setAddress(addr);
         Place place = placeDao.createPlace(p);
 
