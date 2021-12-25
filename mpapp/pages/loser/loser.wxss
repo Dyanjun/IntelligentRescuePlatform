@@ -1,0 +1,72 @@
+/**login.wxss**/
+.title {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: large;
+}
+
+.submit {
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+
+.subtitle {
+  margin-top: 30px;
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.login {
+  margin-top: 40px;
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.logo {
+  width: 24px;
+  height: 24px;
+}
+
+.form {
+  margin-top: 20px;
+}
+
+.line {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: small;
+  display: flex;
+}
+
+.input {
+  border-bottom: 2px solid #999999;
+}
+
+label {
+  margin-right: 50rpx;
+}
+
+.register {
+  text-decoration-line: underline;
+}
+
+.cube {
+  border-bottom: 3px solid #bbbbbb;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.content {
+  width: 90%;
+}
+
+.button {
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.photos {
+  font-weight: bold;
+  color: #555555;
+  text-decoration-line: underline;
+}

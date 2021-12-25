@@ -1,0 +1,122 @@
+/**login.wxss**/
+.title {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: large;
+}
+
+.subtitle {
+  margin-top: 30px;
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.subsubtitle {
+  margin-top: 30px;
+  font-weight: bold;
+  font-size: large;
+}
+
+.login {
+  margin-top: 40px;
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.logo {
+  width: 24px;
+  height: 24px;
+}
+
+.form {
+  margin-top: 20px;
+}
+
+.line {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: small;
+  display: flex;
+}
+
+.input {
+  border-bottom: 2px solid #999999;
+}
+
+label {
+  margin-right: 50rpx;
+}
+
+.register {
+  text-decoration-line: underline;
+}
+
+.cube {
+  /* border: 3px solid #bbbbbb; */
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.content {
+  width: 70%;
+}
+
+.button {
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.photos {
+  font-weight: bold;
+  color: #555555;
+  text-decoration-line: underline;
+}
+
+.table {
+  margin-top: 10px;
+  border: 0px solid darkgray;
+  font-size: x-small;
+  width: 100%;
+ }
+ .tr {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  height: 3rem;
+  align-items: center;
+ }
+ .td {
+  width:30%;
+  justify-content: center;
+  text-align: center;
+ }
+ .id_td {
+  width:10%;
+  justify-content: center;
+  text-align: center;
+ }
+ .bg-w{
+  background: snow;
+ }
+ .bg-g{
+  background: #E6F3F9;
+ }
+ .th {
+  width: 30%;
+  justify-content: center;
+  background: rgb(194, 61, 61);
+  color: #fff;
+  display: flex;
+  height: 3rem;
+  align-items: center;
+}
+
+.id_th {
+  width: 10%;
+  justify-content: center;
+  background: rgb(194, 61, 61);
+  color: #fff;
+  display: flex;
+  height: 3rem;
+  align-items: center;
+}

@@ -1,0 +1,45 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="title">
+    <image class="logo" src="https://vi.sjtu.edu.cn/uploads/files/caf2f5045c47308250fab3812dfe2003-6896b91594f238b24e67696224948251.png"></image>
+    <text>  IST智能救援平台客户端</text>
+  </view>
+
+  <view class="subtitle"> 
+    <text>救援人员信息</text>  
+  </view>
+  
+  <view class="content">
+    <view
+      wx:for="{{rescueList}}"
+      wx:for-item="item" 
+      wx:for-index="index"
+      wx:key="key"
+      >
+      <view class="cube">
+        <view class="line"> 
+          <label>ID:</label>
+          <text>{{item.id}}</text>
+        </view>
+        <view class="line"> 
+          <label>姓名:</label>
+          <text>{{item.name}}</text>
+        </view>
+        <view class="line"> 
+          <label>联系电话:</label>
+          <text>{{item.telephone}}</text>
+        </view>
+        <view class="line"> 
+          <label>位置:</label>
+        </view>
+        <view class="line"> 
+          <map longitude="{{item.place.longitude}}" latitude="{{item.place.latitude}}" markers="{{markers[index]}}"></map>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- <button class="submit" type="default" bindtap="submit">
+    提交线索
+  </button> -->
+</view>

@@ -1,0 +1,73 @@
+/**login.wxss**/
+.title {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: large;
+}
+
+.subtitle {
+  margin-top: 30px;
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.login {
+  margin-top: 40px;
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.button {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: #f2f2f2;
+  color: cadetblue;
+}
+
+.logo {
+  width: 24px;
+  height: 24px;
+}
+
+.cube {
+  margin-bottom: 20px;
+}
+
+.form {
+  margin-top: 20px;
+}
+
+.line {
+  margin-top: 20px;
+  font-size: small;
+  display: flex;
+}
+
+.input {
+  border-bottom: 2px solid #999999;
+}
+
+label {
+  margin-right: 50rpx;
+}
+
+.register {
+  text-decoration-line: underline;
+}
+
+.map {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.weather {
+  font-size: large;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.inline {
+  margin-top: 5px;
+  font-size: small;
+  display: flex;
+}
